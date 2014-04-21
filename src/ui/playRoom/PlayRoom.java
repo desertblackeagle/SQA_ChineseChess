@@ -1,4 +1,4 @@
-package ui.gameRoom;
+package ui.playRoom;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,14 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 
 import ui.ParentFrame;
-import ui.gameRoom.viewpanel.ViewPanel;
+import ui.playRoom.viewpanel.ViewPanel;
 
-public class GameRoomFrame extends ParentFrame {
+public class PlayRoom extends ParentFrame {
+
 	private JLabel background, exit, narrow;
 	private ViewPanel viewPanel;
 	private MouseAdapter mouseForExitNarrow;
 
-	public GameRoomFrame() {
+	public PlayRoom() {
 		// TODO Auto-generated constructor stub
 		initMouseAdapter();
 		initFrame();
@@ -28,7 +29,7 @@ public class GameRoomFrame extends ParentFrame {
 		revalidate();
 		repaint();
 	}
-	
+
 	private void initMouseAdapter() {
 		mouseForExitNarrow = new MouseAdapter() {
 
@@ -110,6 +111,7 @@ public class GameRoomFrame extends ParentFrame {
 	}
 
 	public static void main(String[] args) {
-		GameRoomFrame t = new GameRoomFrame();
+		PlayRoom p = new PlayRoom();
 	}
+
 }
