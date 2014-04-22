@@ -12,6 +12,10 @@ public class ParentFrame extends JFrame {
 	public ParentFrame() {
 		// TODO Auto-generated constructor stub
 		setSize(1500, 900);
+//		setSize(1300, 900);
+//		setSize(800, 600);
+//		setSize(1200, 700);
+//		setSize(1000, 600);
 		setLayout(null);
 		setResizable(false);
 		setUndecorated(true);

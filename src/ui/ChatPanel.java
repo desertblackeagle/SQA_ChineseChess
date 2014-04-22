@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class ChatPanel extends JPanel {
 
@@ -34,8 +36,11 @@ public class ChatPanel extends JPanel {
 	private void initJTextArea() {
 
 		chatTextArea = new JTextArea();
+		chatTextArea.setEditable(false);
 		chatInputArea = new JTextArea();
 		chatInputArea.setLineWrap(true);
+		LineBorder tt = new LineBorder(Color.BLACK);
+		chatInputArea.setBorder(tt);
 		chatInputArea.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent arg0) {
 			}

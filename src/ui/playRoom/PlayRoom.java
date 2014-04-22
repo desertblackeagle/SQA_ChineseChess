@@ -14,7 +14,6 @@ import ui.ParentFrame;
 import ui.playRoom.viewpanel.ViewPanel;
 
 public class PlayRoom extends ParentFrame {
-
 	private JLabel background, exit, narrow;
 	private ViewPanel viewPanel;
 	private MouseAdapter mouseForExitNarrow;
@@ -95,7 +94,7 @@ public class PlayRoom extends ParentFrame {
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
 			// //////////////////////---------------------------------- start application;
-			viewPanel = new ViewPanel(10, getHeight() / 7 + 10, getWidth() - 20, getHeight() * 6 / 7 - 20);
+			viewPanel = new ViewPanel(10, getHeight() / 10 + 10, getWidth() - 20, getHeight() * 9 / 10 - 20);
 			viewPanel.addMouseListener(new MouseAdapter() {
 			});
 			add(viewPanel);
