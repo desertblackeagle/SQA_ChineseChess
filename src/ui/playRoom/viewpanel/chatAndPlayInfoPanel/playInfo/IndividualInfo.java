@@ -21,6 +21,7 @@ public class IndividualInfo extends JPanel {
 	}
 
 	private void setComponentFont(int width) {
+		// 寬度大於一定大小則放大字體
 		if (width > 300) {
 			win.setFont(new Font(Font.DIALOG, Font.BOLD, 22));
 			lose.setFont(new Font(Font.DIALOG, Font.BOLD, 22));
@@ -38,8 +39,24 @@ public class IndividualInfo extends JPanel {
 	}
 
 	private void initBound() {
-		win.setBounds(10, 0, getHeight(), getHeight() / 3);
-		lose.setBounds(10, getHeight() / 3, getWidth(), getHeight() / 3);
-		name.setBounds(10, getHeight() * 2 / 3, getWidth(), getHeight() / 3);
+		win.setBounds(10, 0, getHeight(), getHeight() / labelNum);
+		lose.setBounds(10, getHeight() / labelNum, getWidth(), getHeight() / labelNum);
+		name.setBounds(10, getHeight() * 2 / labelNum, getWidth(), getHeight() / labelNum);
 	}
+
+	// API //
+
+	public void setWin(int win) {
+		this.win.setText("勝 : " + win);
+	}
+
+	public void setLose(int lose) {
+		this.lose.setText("敗 : " + lose);
+	}
+
+	public void setName(String name) {
+		this.name.setText("玩家名字 : " + name);
+	}
+
+	// API end //
 }

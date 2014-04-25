@@ -4,25 +4,36 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public class ChineseChessBoard extends JPanel {
+import data.chess.ChessTest;
 
-	int gridLength;
-	int weightFromPanelEdge, heightFromPanelEdge;
+public class ChineseChessBoard extends JPanel implements MouseMotionListener, MouseListener, Observer {
+
+	private int gridLength;
+	private int weightFromPanelEdge, heightFromPanelEdge;
+	private int chessBoardWidth, chessBoardHeight;
 
 	public ChineseChessBoard(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
 		setSize(width, height);
 		setLocation(locationX, locationY);
-
-		allocationSpace(width, height);
+		setLayout(null);
+		chessBoardWidth = width;
+		chessBoardHeight = height;
+		allocationSpace(width - 60, height - 60);
 	}
 
-	private void allocationSpace(int weight, int height) {
-		gridLength = Math.min(height / 9, weight / 8);
+	private void allocationSpace(int width, int height) {
+		gridLength = Math.min(height / 9, width / 8);
 		weightFromPanelEdge = (getWidth() - 8 * gridLength) / 2;
 		heightFromPanelEdge = (getHeight() - 9 * gridLength) / 2;
 	}
@@ -69,16 +80,64 @@ public class ChineseChessBoard extends JPanel {
 		drawXLine(g);
 	}
 
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		JFrame f = new JFrame();
-//		f.setVisible(true);
-//		f.setLayout(null);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setSize(900, 900);
-//		ChineseChessBoard ccb = new ChineseChessBoard(800, 800);
-//		ccb.setBounds(10, 10, 800, 800);
-//		f.add(ccb);
-//	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x - ((JComponent) e.getSource()).getWidth() / 2);
+		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y - ((JComponent) e.getSource()).getHeight() / 2);
+		((JComponent) e.getSource()).setLocation(locX, locY);
+//		System.out.println(locX + " " + locY);
+	}
 
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println(e.getX() + " " + e.getY());
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	// observer //
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public int getChessBoardWidth() {
+		return chessBoardWidth;
+	}
+
+	public int getChessBoardHeight() {
+		return chessBoardHeight;
+	}
 }

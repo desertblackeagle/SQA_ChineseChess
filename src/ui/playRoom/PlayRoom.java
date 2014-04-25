@@ -2,6 +2,7 @@ package ui.playRoom;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -10,13 +11,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
+import ui.ChatPanel;
 import ui.ParentFrame;
+import ui.playRoom.chessBoard.ChineseChessBoard;
 import ui.playRoom.viewpanel.ViewPanel;
+import ui.playRoom.viewpanel.chatAndPlayInfoPanel.ChatAndPlayInfo;
+import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 
 public class PlayRoom extends ParentFrame {
-	private JLabel background, exit, narrow;
+	private JLabel background, exit, narrow, logo;
 	private ViewPanel viewPanel;
 	private MouseAdapter mouseForExitNarrow;
+	private ImageIcon logoIcon;
+	private ChatAndPlayInfo chatAndPlayInfo;
+	private ChatPanel chatPanel;
+	private PlayInfo playerAInfo, playerBInfo;
+	private ChineseChessBoard chessBoard;
 
 	public PlayRoom() {
 		// TODO Auto-generated constructor stub
@@ -27,8 +37,26 @@ public class PlayRoom extends ParentFrame {
 
 		revalidate();
 		repaint();
+		getAndSetAllComponent();
+		testDrive();
 	}
 
+	private void testDrive() {
+		changePlay();
+		appendChatArea("Rose > Hello !");
+
+		setPlayerAPhoto(new ImageIcon("C:/sqa/wallpaper/Desert.jpg"));
+		setPlayerAInfoWin(51);
+		setPlayerAInfoLose(0);
+		setPlayerAInfoName("Rose");
+
+		setPlayerBPhoto(new ImageIcon("C:/sqa/wallpaper/Jellyfish.jpg"));
+		setPlayerBInfoWin(1000);
+		setPlayerBInfoLose(0);
+		setPlayerBInfoName("God");
+	}
+
+	// 設置關閉和縮小的listener
 	private void initMouseAdapter() {
 		mouseForExitNarrow = new MouseAdapter() {
 
@@ -60,8 +88,11 @@ public class PlayRoom extends ParentFrame {
 	}
 
 	private void narrowFrame() {
+		// 縮小視窗
 		this.setExtendedState(JFrame.ICONIFIED);
 	}
+
+	// init Component //
 
 	private void initLabel() {
 		exit = new JLabel("X", JLabel.CENTER);
@@ -76,6 +107,13 @@ public class PlayRoom extends ParentFrame {
 //		narrow.setOpaque(true);
 		narrow.setForeground(Color.white);
 		narrow.addMouseListener(mouseForExitNarrow);
+
+		logoIcon = new ImageIcon("c:/sqa/wallpaper/logo.png");
+		logo = new JLabel(logoIcon);
+		logo.setSize(140, 120);
+		logo.setLocation(0, 0);
+		logoIcon.setImage(logoIcon.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
+		add(logo);
 	}
 
 	private void initBackground() {
@@ -109,8 +147,86 @@ public class PlayRoom extends ParentFrame {
 		narrow.setBounds(getWidth() - 60, 15, 20, 20);
 	}
 
-	public static void main(String[] args) {
-		PlayRoom p = new PlayRoom();
+	// init Component end //
+
+	private void getAndSetAllComponent() {
+		chatAndPlayInfo = viewPanel.getChatAndPlayInfo();
+		chatPanel = viewPanel.getChatAndPlayInfo().getChatPanel();
+		playerAInfo = viewPanel.getChatAndPlayInfo().getPlayerAInfo();
+		playerBInfo = viewPanel.getChatAndPlayInfo().getPlayerBInfo();
+		chessBoard = viewPanel.getChessBoard();
 	}
+
+	// API //
+
+	public void changePlay() {
+		chatAndPlayInfo.changePlay();
+	}
+
+	public void appendChatArea(String chatString) {
+		chatPanel.appendChatArea(chatString);
+	}
+
+	public void setPlayerAPhoto(ImageIcon photo) {
+		playerAInfo.setPlayerPhoto(photo);
+	}
+
+	public void setPlayerBPhoto(ImageIcon photo) {
+		playerBInfo.setPlayerPhoto(photo);
+	}
+
+	public void setPlayerAInfoWin(int win) {
+		playerAInfo.getPlayerIndividualInfo().setWin(win);
+	}
+
+	public void setPlayerAInfoLose(int lose) {
+		playerAInfo.getPlayerIndividualInfo().setLose(lose);
+	}
+
+	public void setPlayerAInfoName(String name) {
+		playerAInfo.getPlayerIndividualInfo().setName(name);
+	}
+
+	public void setPlayerBInfoWin(int win) {
+		playerBInfo.getPlayerIndividualInfo().setWin(win);
+	}
+
+	public void setPlayerBInfoLose(int lose) {
+		playerBInfo.getPlayerIndividualInfo().setLose(lose);
+	}
+
+	public void setPlayerBInfoName(String name) {
+		playerBInfo.getPlayerIndividualInfo().setName(name);
+	}
+
+	public ViewPanel getViewPanel() {
+		return viewPanel;
+	}
+
+	public ChatAndPlayInfo getChatAndPlayInfo() {
+		return chatAndPlayInfo;
+	}
+
+	public ChatPanel getChatPanel() {
+		return chatPanel;
+	}
+
+	public PlayInfo getPlayerAInfo() {
+		return playerAInfo;
+	}
+
+	public PlayInfo getPlayerBInfo() {
+		return playerBInfo;
+	}
+
+	public ChineseChessBoard getChessBoard() {
+		return chessBoard;
+	}
+
+	// API end //
+
+//	public static void main(String[] args) {
+//		PlayRoom p = new PlayRoom();
+//	}
 
 }

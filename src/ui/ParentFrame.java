@@ -10,7 +10,7 @@ public class ParentFrame extends JFrame {
 	private int pressX, pressY;
 
 	public ParentFrame() {
-		// TODO Auto-generated constructor stub
+//		 TODO Auto-generated constructor stub
 		setSize(1500, 900);
 //		setSize(1300, 900);
 //		setSize(800, 600);
@@ -22,6 +22,7 @@ public class ParentFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 
+		// 可以拖曳視窗
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

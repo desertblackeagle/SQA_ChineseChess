@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class PlayInfo extends JPanel {
-	private JLabel playerPhoto, playerName;
+	private JLabel playerPhoto;
 	private ImageIcon photo;
 	private LineBorder border;
 	private IndividualInfo playerIndividualInfo;
@@ -34,14 +34,10 @@ public class PlayInfo extends JPanel {
 		photo.setImage(photo.getImage().getScaledInstance(playerPhoto.getWidth(), playerPhoto.getHeight(), Image.SCALE_DEFAULT));
 		add(playerPhoto);
 
-		playerName = new JLabel("PlayerA", JLabel.CENTER);
-//		add(playerName);
-
 	}
 
 	private void initBound() {
 		playerPhoto.setBounds(0, 0, getHeight(), getHeight());
-		playerName.setBounds(0, getHeight() * 4 / 5, getWidth(), getHeight() / 5);
 	}
 
 	private void initBoarder() {
@@ -58,4 +54,17 @@ public class PlayInfo extends JPanel {
 	private void initImageIcon() {
 		photo = new ImageIcon("c:/sqa/playerAPhoto.jpg");
 	}
+
+	// API //
+
+	public void setPlayerPhoto(ImageIcon photo) {
+		photo.setImage(photo.getImage().getScaledInstance(playerPhoto.getWidth(), playerPhoto.getHeight(), Image.SCALE_DEFAULT));
+		playerPhoto.setIcon(photo);
+	}
+
+	public IndividualInfo getPlayerIndividualInfo() {
+		return playerIndividualInfo;
+	}
+
+	// API end //
 }
