@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import control.GameObservable;
 import data.chess.Chess;
 import data.chess.ChessBox;
 
@@ -23,12 +25,16 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	private int gridLength;
 	private int weightFromPanelEdge, heightFromPanelEdge;
 	private int chessBoardWidth, chessBoardHeight;
+	private GameObservable obs;
 
 	public ChineseChessBoard(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
 		setSize(width, height);
 		setLocation(locationX, locationY);
 		setLayout(null);
+
+		obs = new GameObservable();
+
 		chessBoardWidth = width;
 		chessBoardHeight = height;
 		allocationSpace(width - 60, height - 60);
@@ -101,7 +107,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getX() + " " + e.getY());
+//		System.out.println(e.getX() + " " + e.getY());
 	}
 
 	@Override
@@ -125,7 +131,11 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x);
+		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y);
+		setChanged();
+		notifyObservers(((JComponent) e.getSource()));
+		System.out.println(locX + " : " + locY);
 	}
 
 	// observer //
@@ -144,6 +154,38 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 				revalidate();
 			}
 		}
+	}
+
+	public void setChanged() {
+		obs.setChanged();
+	}
+
+	public void addObserver(Observer observer) {
+		obs.addObserver(observer);
+	}
+
+	public int countObservers() {
+		return obs.countObservers();
+	}
+
+	public void deleteObserver(Observer observer) {
+		obs.deleteObserver(observer);
+	}
+
+	public void deleteObservers() {
+		obs.deleteObservers();
+	}
+
+	public void notifyObservers() {
+		obs.notifyObservers();
+	}
+
+	public void notifyObservers(Object o) {
+		obs.notifyObservers(o);
+	}
+
+	public void notifyObservers(Observer observer) {
+		obs.notifyObservers(observer);
 	}
 
 	public int getChessBoardWidth() {

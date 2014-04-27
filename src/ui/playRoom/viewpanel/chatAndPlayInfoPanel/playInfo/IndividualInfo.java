@@ -1,6 +1,8 @@
 package ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo;
 
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,6 +58,18 @@ public class IndividualInfo extends JPanel {
 
 	public void setName(String name) {
 		this.name.setText("玩家名字 : " + name);
+	}
+
+	public JLabel getWin() {
+		return win;
+	}
+
+	public JLabel getLose() {
+		return lose;
+	}
+
+	public JLabel getPlayerName() {
+		return name;
 	}
 
 	// API end //

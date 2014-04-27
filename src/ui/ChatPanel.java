@@ -15,6 +15,7 @@ public class ChatPanel extends JPanel {
 	private JTextArea chatInputArea, chatTextArea;
 	private JScrollPane chatScrollPanel;
 	private int width, height;
+	private String localPlayerName = "";
 
 	public ChatPanel(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -41,6 +42,7 @@ public class ChatPanel extends JPanel {
 		// 聊天室顯示框
 		chatTextArea = new JTextArea();
 		chatTextArea.setEditable(false);
+		chatTextArea.setLineWrap(true);
 		// 聊天室輸入框
 		chatInputArea = new JTextArea();
 		chatInputArea.setLineWrap(true);
@@ -50,7 +52,9 @@ public class ChatPanel extends JPanel {
 			public void keyReleased(KeyEvent arg0) {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					// call socket to send the message
-					System.out.println(chatInputArea.getText());
+					System.out.println(chatInputArea.getText().replace("\n", ""));
+					chatTextArea.append(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
+					chatTextArea.setCaretPosition(chatTextArea.getText().length());
 					chatInputArea.setText("");
 				}
 			}
@@ -73,6 +77,14 @@ public class ChatPanel extends JPanel {
 
 	public void appendChatArea(String chatString) {
 		chatTextArea.append(chatString.replace('\n', ' ') + "\n");
+	}
+
+	public String getLocalPlayerName() {
+		return localPlayerName;
+	}
+
+	public void setLocalPlayerName(String localPlayerName) {
+		this.localPlayerName = localPlayerName;
 	}
 
 	// API end //

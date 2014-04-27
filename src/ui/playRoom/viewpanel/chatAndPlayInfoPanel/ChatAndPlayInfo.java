@@ -53,14 +53,14 @@ public class ChatAndPlayInfo extends JPanel {
 		componentWidth = getWidth();
 		componentHeight = (getHeight() - 2 * gap) / 8;
 
-		chatPanel = new ChatPanel(0, gap + 2 * componentHeight, (getWidth() - gap) / 2, componentHeight * 4);
-		add(chatPanel);
-
 		playerAInfo = new PlayInfo(0, 0, getWidth(), componentHeight * 2);
 		add(playerAInfo);
 
 		playerBInfo = new PlayInfo(0, componentHeight * 6 + 2 * gap, getWidth(), componentHeight * 2);
 		add(playerBInfo);
+
+		chatPanel = new ChatPanel(0, gap + 2 * componentHeight, (getWidth() - gap) / 2, componentHeight * 4);
+		add(chatPanel);
 	}
 
 	private void initLabel() {

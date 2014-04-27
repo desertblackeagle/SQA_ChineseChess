@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,6 +18,7 @@ import ui.playRoom.chessBoard.ChineseChessBoard;
 import ui.playRoom.viewpanel.ViewPanel;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.ChatAndPlayInfo;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
+import control.GameObservable;
 
 public class PlayRoom extends ParentFrame {
 	private JLabel background, exit, narrow, logo;
@@ -28,6 +29,7 @@ public class PlayRoom extends ParentFrame {
 	private ChatPanel chatPanel;
 	private PlayInfo playerAInfo, playerBInfo;
 	private ChineseChessBoard chessBoard;
+	private GameObservable obs;
 
 	public PlayRoom() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +37,8 @@ public class PlayRoom extends ParentFrame {
 		initFrame();
 		initBackground();
 		initBound();
+
+		obs = new GameObservable();
 
 		revalidate();
 		repaint();
@@ -85,7 +89,6 @@ public class PlayRoom extends ParentFrame {
 				super.mouseExited(e);
 				e.getComponent().setForeground(Color.white);
 			}
-
 
 		};
 	}
@@ -187,6 +190,7 @@ public class PlayRoom extends ParentFrame {
 	}
 
 	public void setPlayerAInfoName(String name) {
+		chatPanel.setLocalPlayerName(name);
 		playerAInfo.getPlayerIndividualInfo().setName(name);
 	}
 
@@ -224,6 +228,40 @@ public class PlayRoom extends ParentFrame {
 
 	public ChineseChessBoard getChessBoard() {
 		return chessBoard;
+	}
+
+	// observable //
+
+	public void setChanged() {
+		obs.setChanged();
+	}
+
+	public void addObserver(Observer observer) {
+		obs.addObserver(observer);
+	}
+
+	public int countObservers() {
+		return obs.countObservers();
+	}
+
+	public void deleteObserver(Observer observer) {
+		obs.deleteObserver(observer);
+	}
+
+	public void deleteObservers() {
+		obs.deleteObservers();
+	}
+
+	public void notifyObservers() {
+		obs.notifyObservers();
+	}
+
+	public void notifyObservers(Object o) {
+		obs.notifyObservers(o);
+	}
+
+	public void notifyObservers(Observer observer) {
+		obs.notifyObservers(observer);
 	}
 
 	// API end //

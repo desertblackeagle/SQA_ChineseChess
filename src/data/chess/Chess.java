@@ -15,9 +15,11 @@ public class Chess extends JComponent {
 	private int grid;
 	private boolean dead = false;
 	private int chessLocX, chessLocY;
+	private ChessBoardLocation chessBoardLoc;
 
-	public Chess(Point point, int chessLocX, int chessLocY, int grid, String path, String chessName) {
+	public Chess(Point point, int chessLocX, int chessLocY, int grid, String path, String chessName, ChessBoardLocation chessBoardLoc) {
 		// TODO Auto-generated constructor stub
+		this.chessBoardLoc = chessBoardLoc;
 		this.chessName = chessName;
 		this.chessLocX = chessLocX;
 		this.chessLocY = chessLocY;
@@ -33,11 +35,26 @@ public class Chess extends JComponent {
 		icon = new ImageIcon(path);
 		img = icon.getImage();
 		g.drawImage(img, 0, 0, grid * 4 / 5, grid * 4 / 5, this);
+	}
 
+	public void goBack() {
+		setLocation(chessBoardLoc.getAbsLocOnBoard(chessLocX, chessLocY));
+	}
+
+	public void setChessToXY(int x, int y) {
+		setLocation(chessBoardLoc.getAbsLocOnBoard(x, y));
 	}
 
 	public String getChessName() {
 		return chessName;
+	}
+
+	public int getAbsLocationX() {
+		return getLocation().x;
+	}
+
+	public int getAbsLocationY() {
+		return getLocation().y;
 	}
 
 	public int getChessLocX() {
