@@ -35,4 +35,17 @@ public class Chess extends JComponent {
 		g.drawImage(img, 0, 0, grid * 4 / 5, grid * 4 / 5, this);
 
 	}
+
+	public String getChessName() {
+		return chessName;
+	}
+
+	public int getChessLocX() {
+		return chessLocX;
+	}
+
+	public int getChessLocY() {
+		return chessLocY;
+	}
+
 }

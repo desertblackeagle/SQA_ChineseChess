@@ -1,10 +1,13 @@
 package data.chess;
 
+import java.util.ArrayList;
+import java.util.Observable;
+
 import javax.swing.JButton;
 
 import ui.playRoom.chessBoard.ChineseChessBoard;
 
-public class ChessTable {
+public class ChessBox extends Observable {
 	private Chess redHorse1;
 	private Chess redHorse2;
 	private Chess blackHorse1;
@@ -39,13 +42,15 @@ public class ChessTable {
 	private Chess blackWarrior2;
 	private ChessBoardLocation chessBoardLoc;
 	private String photoSubPath = "C:/sqa/chess/";
+	private ArrayList<Chess> chessBoxList;
 
-	public ChessTable(ChessBoardLocation chessBoardLoc) {
+	public ChessBox(ChessBoardLocation chessBoardLoc) {
 		this.chessBoardLoc = chessBoardLoc;
+		chessBoxList = new ArrayList<Chess>();
 		// TODO Auto-generated constructor stub
 	}
 
-	public void initChess(ChineseChessBoard c) {
+	public void initChess() {
 		redHorse1 = new Chess(chessBoardLoc.getAbsLocOnBoard(1, 9), 1, 9, chessBoardLoc.getGridLength(), photoSubPath + "redHorse.png", "redHorse1");
 		redHorse2 = new Chess(chessBoardLoc.getAbsLocOnBoard(7, 9), 7, 9, chessBoardLoc.getGridLength(), photoSubPath + "redHorse.png", "redHorse2");
 		blackHorse1 = new Chess(chessBoardLoc.getAbsLocOnBoard(1, 0), 1, 0, chessBoardLoc.getGridLength(), photoSubPath + "blackHorse.png", "blackHorse1");
@@ -79,39 +84,44 @@ public class ChessTable {
 		blackWarrior1 = new Chess(chessBoardLoc.getAbsLocOnBoard(3, 0), 3, 0, chessBoardLoc.getGridLength(), photoSubPath + "blackWarrior.png", "blackWarrior1");
 		blackWarrior2 = new Chess(chessBoardLoc.getAbsLocOnBoard(5, 0), 5, 0, chessBoardLoc.getGridLength(), photoSubPath + "blackWarrior.png", "blackWarrior2");
 
-		c.add(redHorse1);
-		c.add(redHorse2);
-		c.add(blackHorse1);
-		c.add(blackHorse2);
-		c.add(redRook1);
-		c.add(redRook2);
-		c.add(blackRook1);
-		c.add(blackRook2);
-		c.add(redCannon1);
-		c.add(redCannon2);
-		c.add(blackCannon1);
-		c.add(blackCannon2);
-		c.add(redPawn1);
-		c.add(redPawn2);
-		c.add(redPawn3);
-		c.add(redPawn4);
-		c.add(redPawn5);
-		c.add(blackPawn1);
-		c.add(blackPawn2);
-		c.add(blackPawn3);
-		c.add(blackPawn4);
-		c.add(blackPawn5);
-		c.add(redKing);
-		c.add(blackKing);
-		c.add(redElephant1);
-		c.add(redElephant2);
-		c.add(blackElephant1);
-		c.add(blackElephant2);
-		c.add(redWarrior1);
-		c.add(redWarrior2);
-		c.add(blackWarrior1);
-		c.add(blackWarrior2);
-		c.revalidate();
-		c.repaint();
+		chessBoxList.add(redHorse1);
+		chessBoxList.add(redHorse2);
+		chessBoxList.add(blackHorse1);
+		chessBoxList.add(blackHorse2);
+		chessBoxList.add(redRook1);
+		chessBoxList.add(redRook2);
+		chessBoxList.add(blackRook1);
+		chessBoxList.add(blackRook2);
+		chessBoxList.add(redCannon1);
+		chessBoxList.add(redCannon2);
+		chessBoxList.add(blackCannon1);
+		chessBoxList.add(blackCannon2);
+		chessBoxList.add(redPawn1);
+		chessBoxList.add(redPawn2);
+		chessBoxList.add(redPawn3);
+		chessBoxList.add(redPawn4);
+		chessBoxList.add(redPawn5);
+		chessBoxList.add(blackPawn1);
+		chessBoxList.add(blackPawn2);
+		chessBoxList.add(blackPawn3);
+		chessBoxList.add(blackPawn4);
+		chessBoxList.add(blackPawn5);
+		chessBoxList.add(redKing);
+		chessBoxList.add(blackKing);
+		chessBoxList.add(redElephant1);
+		chessBoxList.add(redElephant2);
+		chessBoxList.add(blackElephant1);
+		chessBoxList.add(blackElephant2);
+		chessBoxList.add(redWarrior1);
+		chessBoxList.add(redWarrior2);
+		chessBoxList.add(blackWarrior1);
+		chessBoxList.add(blackWarrior2);
+
+		setChanged();
+		notifyObservers(chessBoxList);
+	}
+
+	public ArrayList<Chess> getChessBox() {
+		return chessBoxList;
 	}
 }

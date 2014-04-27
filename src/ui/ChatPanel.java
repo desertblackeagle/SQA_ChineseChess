@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,12 +14,15 @@ public class ChatPanel extends JPanel {
 
 	private JTextArea chatInputArea, chatTextArea;
 	private JScrollPane chatScrollPanel;
+	private int width, height;
 
 	public ChatPanel(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
 		setSize(width, height);
 		setLocation(locationX, locationY);
 		setLayout(null);
+		this.width = width;
+		this.height = height;
 
 		initJTextArea();
 		initScrollPane();
@@ -31,8 +33,8 @@ public class ChatPanel extends JPanel {
 
 	private void setComponentFont() {
 		// 設定元件字體格式
-		chatInputArea.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
-		chatTextArea.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+		chatInputArea.setFont(new Font(Font.DIALOG, Font.BOLD, 17));
+
 	}
 
 	private void initJTextArea() {

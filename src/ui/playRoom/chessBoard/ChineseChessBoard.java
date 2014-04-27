@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,7 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import data.chess.ChessTest;
+import data.chess.Chess;
+import data.chess.ChessBox;
 
 public class ChineseChessBoard extends JPanel implements MouseMotionListener, MouseListener, Observer {
 
@@ -85,6 +87,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 		// TODO Auto-generated method stub
 		int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x - ((JComponent) e.getSource()).getWidth() / 2);
 		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y - ((JComponent) e.getSource()).getHeight() / 2);
+		setComponentZOrder(((JComponent) e.getSource()), 0);
 		((JComponent) e.getSource()).setLocation(locX, locY);
 //		System.out.println(locX + " " + locY);
 	}
@@ -130,7 +133,17 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-
+		if (o instanceof ChessBox) {
+			if (arg instanceof ArrayList<?>) {
+				for (Chess chess : (ArrayList<Chess>) arg) {
+					add(chess);
+					chess.addMouseListener(this);
+					chess.addMouseMotionListener(this);
+				}
+				repaint();
+				revalidate();
+			}
+		}
 	}
 
 	public int getChessBoardWidth() {

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -61,6 +62,17 @@ public class PlayRoom extends ParentFrame {
 		mouseForExitNarrow = new MouseAdapter() {
 
 			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mousePressed(e);
+				if (((JLabel) e.getComponent()).getText().equals("X")) {
+					System.exit(0);
+				} else {
+					narrowFrame();
+				}
+			}
+
+			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				super.mouseEntered(e);
@@ -74,16 +86,7 @@ public class PlayRoom extends ParentFrame {
 				e.getComponent().setForeground(Color.white);
 			}
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (((JLabel) e.getComponent()).getText().equals("X")) {
-					System.exit(0);
-				} else {
-					narrowFrame();
-				}
 
-			}
 		};
 	}
 

@@ -10,7 +10,11 @@ public class StartGame {
 		PlayRoom playRoom = new PlayRoom();
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);
-		data.getChessTable().initChess(playRoom.getChessBoard());
-	}
 
+		// set observer observable
+		data.getChessBox().addObserver(playRoom.getChessBoard());
+		data.getChessBox().addObserver(data.getChessXYLoc());
+		// set observer observable end
+		data.getChessBox().initChess();
+	}
 }
