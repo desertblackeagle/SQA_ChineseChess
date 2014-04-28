@@ -43,11 +43,10 @@ public class ChessBoardLocation {
 
 	public Point getAbsLocOnBoard(int x, int y) {
 		if (x < 0 || x > 8 || y < 0 || y > 9) {
-			System.out.println("Error : ");
+			System.out.println("Error : " + x + " : " + y + "Out of ");
 		}
 		return location[y][x];
 	}
-
 //	public static void main(String[] args) {
 //		ChessBoardLocation c = new ChessBoardLocation(848, 790);
 //	}

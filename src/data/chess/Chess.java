@@ -45,6 +45,10 @@ public class Chess extends JComponent {
 		setLocation(chessBoardLoc.getAbsLocOnBoard(x, y));
 	}
 
+	public int getGrid() {
+		return grid;
+	}
+
 	public String getChessName() {
 		return chessName;
 	}
@@ -63,6 +67,10 @@ public class Chess extends JComponent {
 
 	public int getChessLocY() {
 		return chessLocY;
+	}
+
+	public ChessBoardLocation getChessBoardLoc() {
+		return chessBoardLoc;
 	}
 
 }
