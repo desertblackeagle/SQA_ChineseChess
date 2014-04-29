@@ -16,13 +16,15 @@ public class Chess extends JComponent {
 	private boolean dead = false;
 	private int chessLocX, chessLocY;
 	private ChessBoardLocation chessBoardLoc;
+	private int color;
 
-	public Chess(Point point, int chessLocX, int chessLocY, int grid, String path, String chessName, ChessBoardLocation chessBoardLoc) {
+	public Chess(Point point, int chessLocX, int chessLocY, int grid, int color, String path, String chessName, ChessBoardLocation chessBoardLoc) {
 		// TODO Auto-generated constructor stub
 		this.chessBoardLoc = chessBoardLoc;
 		this.chessName = chessName;
 		this.chessLocX = chessLocX;
 		this.chessLocY = chessLocY;
+		this.color = color;
 		this.grid = grid;
 		this.path = path;
 		setBounds(((int) point.getX()), ((int) point.getY()), 60, 60);
@@ -71,6 +73,10 @@ public class Chess extends JComponent {
 
 	public ChessBoardLocation getChessBoardLoc() {
 		return chessBoardLoc;
+	}
+
+	public int getColor() {
+		return color;
 	}
 
 }
