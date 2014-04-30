@@ -39,7 +39,6 @@ public class TransferAbsoluteToXY implements Observer {
 			} else {
 				chess.setChessToXY(x, y);
 				System.out.println("TRAN X and Y" + x + " : " + y);
-
 			}
 		} else {
 			chess.goBack();

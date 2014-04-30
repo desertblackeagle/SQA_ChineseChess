@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
@@ -12,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
+import net.Connecter;
 import ui.ChatPanel;
 import ui.ParentFrame;
 import ui.playRoom.chessBoard.ChineseChessBoard;
@@ -20,7 +22,7 @@ import ui.playRoom.viewpanel.chatAndPlayInfoPanel.ChatAndPlayInfo;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 import control.GameObservable;
 
-public class PlayRoom extends ParentFrame {
+public class PlayRoom extends ParentFrame implements Observer {
 	private JLabel background, exit, narrow, logo;
 	private ViewPanel viewPanel;
 	private MouseAdapter mouseForExitNarrow;
@@ -262,6 +264,18 @@ public class PlayRoom extends ParentFrame {
 
 	public void notifyObservers(Observer observer) {
 		obs.notifyObservers(observer);
+	}
+
+	// observable end //
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		if (arg0 instanceof Connecter) {
+			if (arg1 instanceof String) {
+				appendChatArea((String) arg1);
+			}
+		}
 	}
 
 	// API end //

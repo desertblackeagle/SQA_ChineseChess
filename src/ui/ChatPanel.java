@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+
+import control.GameObservable;
 
 public class ChatPanel extends JPanel {
 
@@ -16,6 +19,7 @@ public class ChatPanel extends JPanel {
 	private JScrollPane chatScrollPanel;
 	private int width, height;
 	private String localPlayerName = "";
+	private GameObservable obs;
 
 	public ChatPanel(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -24,7 +28,7 @@ public class ChatPanel extends JPanel {
 		setLayout(null);
 		this.width = width;
 		this.height = height;
-
+		obs = new GameObservable();
 		initJTextArea();
 		initScrollPane();
 		setComponentFont();
@@ -52,9 +56,11 @@ public class ChatPanel extends JPanel {
 			public void keyReleased(KeyEvent arg0) {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					// call socket to send the message
-					System.out.println(chatInputArea.getText().replace("\n", ""));
+					System.out.println("chat : " + chatInputArea.getText().replace("\n", ""));
 					chatTextArea.append(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
 					chatTextArea.setCaretPosition(chatTextArea.getText().length());
+					setChanged();
+					notifyObservers(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
 					chatInputArea.setText("");
 				}
 			}
@@ -77,6 +83,7 @@ public class ChatPanel extends JPanel {
 
 	public void appendChatArea(String chatString) {
 		chatTextArea.append(chatString.replace('\n', ' ') + "\n");
+		chatTextArea.setCaretPosition(chatTextArea.getText().length());
 	}
 
 	public String getLocalPlayerName() {
@@ -85,6 +92,38 @@ public class ChatPanel extends JPanel {
 
 	public void setLocalPlayerName(String localPlayerName) {
 		this.localPlayerName = localPlayerName;
+	}
+
+	public void setChanged() {
+		obs.setChanged();
+	}
+
+	public void addObserver(Observer observer) {
+		obs.addObserver(observer);
+	}
+
+	public int countObservers() {
+		return obs.countObservers();
+	}
+
+	public void deleteObserver(Observer observer) {
+		obs.deleteObserver(observer);
+	}
+
+	public void deleteObservers() {
+		obs.deleteObservers();
+	}
+
+	public void notifyObservers() {
+		obs.notifyObservers();
+	}
+
+	public void notifyObservers(Object o) {
+		obs.notifyObservers(o);
+	}
+
+	public void notifyObservers(Observer observer) {
+		obs.notifyObservers(observer);
 	}
 
 	// API end //
