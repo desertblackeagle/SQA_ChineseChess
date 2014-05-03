@@ -33,9 +33,27 @@ public class ChessXYLocOnChessBoard implements Observer {
 				} else {
 					System.out.print("NULL" + "\t\t");
 				}
-
 			}
 			System.out.println();
 		}
+	}
+
+	public Chess getChess(int x, int y) {
+		return chessXYLocOnBoard[y][x];
+	}
+
+	public void setChess(int x, int y, int toX, int toY) {
+
+		if (chessXYLocOnBoard[toY][toX] != null) {
+			System.out.println("eat : " + x + " " + y);
+			chessXYLocOnBoard[toY][toX].setLocation(50000, 50000);
+			chessXYLocOnBoard[toY][toX] = chessXYLocOnBoard[y][x];
+			chessXYLocOnBoard[y][x] = null;
+		} else {
+			chessXYLocOnBoard[toY][toX] = chessXYLocOnBoard[y][x];
+			chessXYLocOnBoard[y][x] = null;
+		}
+		printXYLoc();
+
 	}
 }

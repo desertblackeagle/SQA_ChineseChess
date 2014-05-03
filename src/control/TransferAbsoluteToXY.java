@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import data.chess.Chess;
 
-public class TransferAbsoluteToXY implements Observer {
+public class TransferAbsoluteToXY extends Observable implements Observer {
 	private int width, height;
 
 	public TransferAbsoluteToXY(int width, int height) {
@@ -38,7 +38,15 @@ public class TransferAbsoluteToXY implements Observer {
 				System.out.println("Tran error x y out of index");
 			} else {
 				chess.setChessToXY(x, y);
-				System.out.println("TRAN X and Y" + x + " : " + y);
+				chess.setChessToX(x);
+				chess.setChessToY(y);
+				if (chess.getChessLocX() == x && chess.getChessLocY() == y) {
+					System.out.println("TRAN X and Y" + x + " : " + y + " but in the same way");
+				} else {
+					setChanged();
+					notifyObservers(chess);
+					System.out.println("TRAN X and Y" + x + " : " + y);
+				}
 			}
 		} else {
 			chess.goBack();

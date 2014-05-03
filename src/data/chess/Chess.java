@@ -4,17 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-public class Chess extends JComponent {
+public class Chess extends JComponent implements Serializable {
 	private String path = "", chessName = "";
 	private ImageIcon icon;
 	private Image img;
 	private int grid;
 	private boolean dead = false;
 	private int chessLocX, chessLocY;
+	private int chessToX, chessToY;
 	private ChessBoardLocation chessBoardLoc;
 	private int color;
 
@@ -71,12 +73,36 @@ public class Chess extends JComponent {
 		return chessLocY;
 	}
 
+	public void setChessLocX(int chessLocX) {
+		this.chessLocX = chessLocX;
+	}
+
+	public void setChessLocY(int chessLocY) {
+		this.chessLocY = chessLocY;
+	}
+
 	public ChessBoardLocation getChessBoardLoc() {
 		return chessBoardLoc;
 	}
 
 	public int getColor() {
 		return color;
+	}
+
+	public int getChessToX() {
+		return chessToX;
+	}
+
+	public void setChessToX(int chessToX) {
+		this.chessToX = chessToX;
+	}
+
+	public int getChessToY() {
+		return chessToY;
+	}
+
+	public void setChessToY(int chessToY) {
+		this.chessToY = chessToY;
 	}
 
 }

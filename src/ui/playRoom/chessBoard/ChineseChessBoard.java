@@ -135,7 +135,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y);
 		setChanged();
 		notifyObservers(((JComponent) e.getSource()));
-		System.out.println(locX + " : " + locY);
+//		System.out.println(locX + " : " + locY);
 	}
 
 	// observer //

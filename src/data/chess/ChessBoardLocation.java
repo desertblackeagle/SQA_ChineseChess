@@ -1,8 +1,9 @@
 package data.chess;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-public class ChessBoardLocation {
+public class ChessBoardLocation implements Serializable {
 	private Point[][] location;
 	private int gridLength;
 	private int weightFromPanelEdge, heightFromPanelEdge;
