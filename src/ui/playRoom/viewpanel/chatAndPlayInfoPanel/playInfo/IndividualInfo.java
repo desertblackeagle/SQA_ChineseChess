@@ -1,8 +1,6 @@
 package ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo;
 
 import java.awt.Font;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

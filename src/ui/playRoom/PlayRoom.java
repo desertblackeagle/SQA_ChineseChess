@@ -32,9 +32,11 @@ public class PlayRoom extends ParentFrame implements Observer {
 	private PlayInfo playerAInfo, playerBInfo;
 	private ChineseChessBoard chessBoard;
 	private GameObservable obs;
+	private int playerTeam = 0;// red 0 black 1 block 3
 
-	public PlayRoom() {
+	public PlayRoom(String APIToken, String userToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
+		setVisible(false);
 		initMouseAdapter();
 		initFrame();
 		initBackground();
@@ -45,22 +47,25 @@ public class PlayRoom extends ParentFrame implements Observer {
 		revalidate();
 		repaint();
 		getAndSetAllComponent();
-		testDrive();
+//		testDrive();
+		setPlayerAInfoName(playerAName);
+		setPlayerAPhoto(playerPhoto);
 	}
 
 	private void testDrive() {
 		changePlay();
 		appendChatArea("Rose > Hello !");
 
-		setPlayerAPhoto(new ImageIcon("C:/sqa/wallpaper/Desert.jpg"));
+		setPlayerAPhoto("http://img.kanzhongguo.com/dat/media/15/2010/12/06/20101206021518227.jpg");
 		setPlayerAInfoWin(51);
 		setPlayerAInfoLose(0);
 		setPlayerAInfoName("Rose");
 
-		setPlayerBPhoto(new ImageIcon("C:/sqa/wallpaper/Jellyfish.jpg"));
+		setPlayerBPhoto("http://img.kanzhongguo.com/dat/media/15/2010/12/06/20101206021518227.jpg");
 		setPlayerBInfoWin(1000);
 		setPlayerBInfoLose(0);
 		setPlayerBInfoName("God");
+		setPlayerTeam(1);
 	}
 
 	// 設置關閉和縮小的listener
@@ -175,12 +180,12 @@ public class PlayRoom extends ParentFrame implements Observer {
 		chatPanel.appendChatArea(chatString);
 	}
 
-	public void setPlayerAPhoto(ImageIcon photo) {
-		playerAInfo.setPlayerPhoto(photo);
+	public void setPlayerAPhoto(String photoUrl) {
+		playerAInfo.setPlayerPhoto(photoUrl);
 	}
 
-	public void setPlayerBPhoto(ImageIcon photo) {
-		playerBInfo.setPlayerPhoto(photo);
+	public void setPlayerBPhoto(String photoUrl) {
+		playerBInfo.setPlayerPhoto(photoUrl);
 	}
 
 	public void setPlayerAInfoWin(int win) {
@@ -232,6 +237,11 @@ public class PlayRoom extends ParentFrame implements Observer {
 		return chessBoard;
 	}
 
+	public void setPlayerTeam(int playerTeam) {
+		chessBoard.setPlayerTeam(playerTeam);
+		this.playerTeam = playerTeam;
+	}
+
 	// observable //
 
 	public void setChanged() {
@@ -267,7 +277,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 	}
 
 	// observable end //
-	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

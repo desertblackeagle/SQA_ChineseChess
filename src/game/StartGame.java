@@ -7,13 +7,15 @@ import data.MainData;
 
 public class StartGame {
 
-	public StartGame() {
+	public StartGame(String APIToken, String userToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
-		PlayRoom playRoom = new PlayRoom();
+
+		PlayRoom playRoom = new PlayRoom(APIToken, userToken, playerAName, playerPhoto);
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);
 		Controler controler = new Controler(chessBoardWidth, chessBoardHeight);
-		Connecter connecter = new Connecter(data.getChessXYLoc());
+		Connecter connecter = new Connecter(playRoom, data.getChessXYLoc(), APIToken, userToken, playerAName, playerPhoto);
+
 		// set observer observable
 		controler.getTransferAbsoluteToXY().addObserver(connecter);
 		connecter.addObserver(playRoom);
@@ -27,6 +29,12 @@ public class StartGame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new StartGame();
+		String APIToken = args[0];
+		String userToken = args[1];
+		String playerAName = args[2];
+		String playerPhoto = args[3];
+
+		new StartGame(APIToken, userToken, playerAName, playerPhoto);
+
 	}
 }

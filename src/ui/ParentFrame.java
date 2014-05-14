@@ -6,8 +6,6 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 
-import oracle.jrockit.jfr.JFR;
-
 public class ParentFrame extends JFrame {
 	private int pressX, pressY;
 

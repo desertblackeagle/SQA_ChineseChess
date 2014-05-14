@@ -2,6 +2,8 @@ package ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -57,7 +59,17 @@ public class PlayInfo extends JPanel {
 
 	// API //
 
-	public void setPlayerPhoto(ImageIcon photo) {
+	public void setPlayerPhoto(String photoUrl) {
+		ImageIcon photo = null;
+		try {
+			photo = new ImageIcon(new URL(photoUrl));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (photo == null) {
+			photo = new ImageIcon("C:/Users/rose/Pictures/Penguins.jpg");
+		}
 		photo.setImage(photo.getImage().getScaledInstance(playerPhoto.getWidth(), playerPhoto.getHeight(), Image.SCALE_DEFAULT));
 		playerPhoto.setIcon(photo);
 	}

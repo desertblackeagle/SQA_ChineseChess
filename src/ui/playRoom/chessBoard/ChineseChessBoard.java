@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -26,6 +25,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	private int weightFromPanelEdge, heightFromPanelEdge;
 	private int chessBoardWidth, chessBoardHeight;
 	private GameObservable obs;
+	private int playerTeam = 3;
 
 	public ChineseChessBoard(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -88,14 +88,24 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 		drawXLine(g);
 	}
 
+	public void setChessListener(int playerTeam) {
+		if (playerTeam == 0) {
+			playerTeam = 0;
+		} else {
+			playerTeam = 1;
+		}
+	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x - ((JComponent) e.getSource()).getWidth() / 2);
-		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y - ((JComponent) e.getSource()).getHeight() / 2);
-		setComponentZOrder(((JComponent) e.getSource()), 0);
-		((JComponent) e.getSource()).setLocation(locX, locY);
-//		System.out.println(locX + " " + locY);
+		if (((Chess) e.getSource()).getColor() == playerTeam) {
+			int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x - ((JComponent) e.getSource()).getWidth() / 2);
+			int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y - ((JComponent) e.getSource()).getHeight() / 2);
+			setComponentZOrder(((JComponent) e.getSource()), 0);
+			((JComponent) e.getSource()).setLocation(locX, locY);
+//			System.out.println(locX + " " + locY);
+		}
 	}
 
 	@Override
@@ -131,11 +141,13 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x);
-		int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y);
-		setChanged();
-		notifyObservers(((JComponent) e.getSource()));
+		if (((Chess) e.getSource()).getColor() == playerTeam) {
+			int locX = (e.getX() + ((JComponent) e.getSource()).getLocation().x);
+			int locY = (e.getY() + ((JComponent) e.getSource()).getLocation().y);
+			setChanged();
+			notifyObservers(((JComponent) e.getSource()));
 //		System.out.println(locX + " : " + locY);
+		}
 	}
 
 	// observer //
@@ -195,4 +207,9 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	public int getChessBoardHeight() {
 		return chessBoardHeight;
 	}
+
+	public void setPlayerTeam(int playerTeam) {
+		this.playerTeam = playerTeam;
+	}
+	
 }
