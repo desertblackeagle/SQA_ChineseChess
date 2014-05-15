@@ -72,11 +72,11 @@ public class Connecter extends Observable implements Observer {
 			return new Socket("127.0.0.1", 56);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			System.out.println("無法連線至local 改成連線至遠端");
-			return connectToRemote();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("無法連線至local 改成連線至遠端");
+			return connectToRemote();
 		}
 		return null;
 	}
@@ -90,6 +90,7 @@ public class Connecter extends Observable implements Observer {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("所有Server接連線失敗");
 		}
 		return null;
 	}
