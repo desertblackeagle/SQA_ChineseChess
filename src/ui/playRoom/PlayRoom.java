@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +17,7 @@ import javax.swing.UIManager;
 
 import net.Connecter;
 import ui.ChatPanel;
+import ui.LodingFrame;
 import ui.ParentFrame;
 import ui.playRoom.chessBoard.ChineseChessBoard;
 import ui.playRoom.viewpanel.ViewPanel;
@@ -33,10 +36,12 @@ public class PlayRoom extends ParentFrame implements Observer {
 	private ChineseChessBoard chessBoard;
 	private GameObservable obs;
 	private int playerTeam = 0;// red 0 black 1 block 3
+	private LodingFrame loadingFrame;
 
 	public PlayRoom(String APIToken, String userToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
 		setVisible(false);
+		loadingFrame = new LodingFrame();
 		initMouseAdapter();
 		initFrame();
 		initBackground();
@@ -130,7 +135,16 @@ public class PlayRoom extends ParentFrame implements Observer {
 	}
 
 	private void initBackground() {
-		background = new JLabel(new ImageIcon("c:/sqa/wallpaper/nubero.jpg"));
+		java.net.URL imUrl = getClass().getResource("/image/");
+		String path = imUrl.toString() + "nubero.jpg";
+		URL url = null;
+		try {
+			url = new URL(path);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		background = new JLabel(new ImageIcon(url));
 		add(background);
 	}
 
@@ -174,6 +188,10 @@ public class PlayRoom extends ParentFrame implements Observer {
 
 	public void changePlay() {
 		chatAndPlayInfo.changePlay();
+	}
+
+	public void setWhichTeam(int team) {
+		chatAndPlayInfo.setWhichTeam(team);
 	}
 
 	public void appendChatArea(String chatString) {
@@ -235,6 +253,10 @@ public class PlayRoom extends ParentFrame implements Observer {
 
 	public ChineseChessBoard getChessBoard() {
 		return chessBoard;
+	}
+
+	public LodingFrame getLoadingFrame() {
+		return loadingFrame;
 	}
 
 	public void setPlayerTeam(int playerTeam) {

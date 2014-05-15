@@ -41,7 +41,7 @@ public class ChessBox extends Observable {
 	private Chess blackWarrior1;
 	private Chess blackWarrior2;
 	private ChessBoardLocation chessBoardLoc;
-	private String photoSubPath = "C:/sqa/chess/";
+	private String photoSubPath = "";
 	private ArrayList<Chess> chessBoxList;
 
 	public ChessBox(ChessBoardLocation chessBoardLoc) {

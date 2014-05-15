@@ -5,12 +5,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class Chess extends JComponent implements Serializable {
-	private String path = "", chessName = "";
+	private String chessPath = "", chessName = "";
 	private ImageIcon icon;
 	private Image img;
 	private int grid;
@@ -20,7 +22,7 @@ public class Chess extends JComponent implements Serializable {
 	private ChessBoardLocation chessBoardLoc;
 	private int color;
 
-	public Chess(Point point, int chessLocX, int chessLocY, int grid, int color, String path, String chessName, ChessBoardLocation chessBoardLoc) {
+	public Chess(Point point, int chessLocX, int chessLocY, int grid, int color, String chessPath, String chessName, ChessBoardLocation chessBoardLoc) {
 		// TODO Auto-generated constructor stub
 		this.chessBoardLoc = chessBoardLoc;
 		this.chessName = chessName;
@@ -28,7 +30,7 @@ public class Chess extends JComponent implements Serializable {
 		this.chessLocY = chessLocY;
 		this.color = color;
 		this.grid = grid;
-		this.path = path;
+		this.chessPath = chessPath;
 		setBounds(((int) point.getX()), ((int) point.getY()), 60, 60);
 		setBounds(((int) point.getX()), ((int) point.getY()), grid * 4 / 5, grid * 4 / 5);
 		setBackground(Color.black);
@@ -36,7 +38,16 @@ public class Chess extends JComponent implements Serializable {
 
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(227, 33, 34));
-		icon = new ImageIcon(path);
+		java.net.URL imUrl = getClass().getResource("/image/chess/");
+		String path = imUrl.toString() + chessPath;
+		URL url = null;
+		try {
+			url = new URL(path);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		icon = new ImageIcon(url);
 		img = icon.getImage();
 		g.drawImage(img, 0, 0, grid * 4 / 5, grid * 4 / 5, this);
 	}

@@ -57,11 +57,15 @@ public class ChatPanel extends JPanel {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					// call socket to send the message
 					System.out.println("chat : " + chatInputArea.getText().replace("\n", ""));
-					chatTextArea.append(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
-					chatTextArea.setCaretPosition(chatTextArea.getText().length());
-					setChanged();
-					notifyObservers(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
-					chatInputArea.setText("");
+					if (!(chatInputArea.getText().replace("\n", "").length() == 0)) {
+						chatTextArea.append(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
+						chatTextArea.setCaretPosition(chatTextArea.getText().length());
+						setChanged();
+						notifyObservers(localPlayerName + " >" + chatInputArea.getText().replace("\n", "") + "\n");
+						chatInputArea.setText("");
+					} else {
+						chatInputArea.setText("");
+					}
 				}
 			}
 		});

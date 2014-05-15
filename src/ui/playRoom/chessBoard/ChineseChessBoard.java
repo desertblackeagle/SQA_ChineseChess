@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -76,7 +78,17 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	}
 
 	protected void paintComponent(Graphics g) {
-		ImageIcon icon = new ImageIcon("c:/sqa/b.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/");
+//		ImageIcon icon = new ImageIcon("c:/sqa/b.jpg");
+		String path = imUrl.toString() + "chessBoard.jpg";
+		URL url = null;
+		try {
+			url = new URL(path);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ImageIcon icon = new ImageIcon(url);
 		Image img = icon.getImage();
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
@@ -211,5 +223,5 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	public void setPlayerTeam(int playerTeam) {
 		this.playerTeam = playerTeam;
 	}
-	
+
 }

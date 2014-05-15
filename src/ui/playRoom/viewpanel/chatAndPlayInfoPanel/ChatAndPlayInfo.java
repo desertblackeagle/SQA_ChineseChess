@@ -19,6 +19,7 @@ public class ChatAndPlayInfo extends JPanel {
 	private JButton exit;
 	private PlayInfo playerAInfo, playerBInfo;
 	private JLabel forWhoToPlay;
+	private JLabel whichTeam;
 	private ActionListener btnListener;
 
 	public ChatAndPlayInfo(int locationX, int locationY, int width, int height) {
@@ -67,11 +68,16 @@ public class ChatAndPlayInfo extends JPanel {
 		forWhoToPlay = new JLabel("輪到你下", JLabel.CENTER);
 		forWhoToPlay.setBorder(new LineBorder(Color.black));
 		add(forWhoToPlay);
+
+		whichTeam = new JLabel("你是紅色", JLabel.CENTER);
+		whichTeam.setBorder(new LineBorder(Color.black));
+		add(whichTeam);
 	}
 
 	private void initBound() {
 		forWhoToPlay.setBounds(gap + (getWidth() - gap) / 2, gap + 2 * componentHeight, (getWidth() - gap) / 2, componentHeight);
-		exit.setBounds(gap + (getWidth() - gap) / 2, gap * 2 + 3 * componentHeight, (getWidth() - gap) / 2, componentHeight);
+		whichTeam.setBounds(gap + (getWidth() - gap) / 2, gap * 2 + 3 * componentHeight, (getWidth() - gap) / 2, componentHeight);
+		exit.setBounds(gap + (getWidth() - gap) / 2, gap * 3 + 4 * componentHeight, (getWidth() - gap) / 2, componentHeight);
 	}
 
 	private void initButton() {
@@ -89,6 +95,12 @@ public class ChatAndPlayInfo extends JPanel {
 			forWhoToPlay.setText("輪到對方下");
 		} else {
 			forWhoToPlay.setText("輪到你下");
+		}
+	}
+
+	public void setWhichTeam(int team) {
+		if (team == 1) {
+			whichTeam.setText("你是黑色");
 		}
 	}
 

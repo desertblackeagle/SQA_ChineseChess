@@ -54,7 +54,16 @@ public class PlayInfo extends JPanel {
 	}
 
 	private void initImageIcon() {
-		photo = new ImageIcon("c:/sqa/playerAPhoto.jpg");
+		java.net.URL imUrl = getClass().getResource("/image/");
+		String path = imUrl.toString() + "noPlayerPhoto.jpg";
+		URL url = null;
+		try {
+			url = new URL(path);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		photo = new ImageIcon(url);
 	}
 
 	// API //
@@ -68,7 +77,16 @@ public class PlayInfo extends JPanel {
 			e.printStackTrace();
 		}
 		if (photo == null) {
-			photo = new ImageIcon("C:/Users/rose/Pictures/Penguins.jpg");
+			java.net.URL imUrl = getClass().getResource("/image/");
+			String path = imUrl.toString() + "noPlayerPhoto.jpg";
+			URL url = null;
+			try {
+				url = new URL(path);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			photo = new ImageIcon(url);
 		}
 		photo.setImage(photo.getImage().getScaledInstance(playerPhoto.getWidth(), playerPhoto.getHeight(), Image.SCALE_DEFAULT));
 		playerPhoto.setIcon(photo);

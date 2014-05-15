@@ -42,9 +42,10 @@ public class Connecter extends Observable implements Observer {
 			public void run() {
 				try {
 //					client = new Socket("123.204.84.144", 56);
-					client = new Socket("127.0.0.1", 56);
+//					client = new Socket("127.0.0.1", 56);
 //					client = new Socket("192.168.1.239", 56);
 //					client = new Socket("192.168.1.109", 56);
+					client = connectToLocal();
 					serverReader = new BufferedReader(new InputStreamReader(client.getInputStream(), "utf-8"));
 					serverWriter = new PrintStream(client.getOutputStream(), true, "utf-8");
 					System.out.println("client io set up complete ");
@@ -64,6 +65,33 @@ public class Connecter extends Observable implements Observer {
 				}
 			}
 		}).start();
+	}
+
+	private Socket connectToLocal() {
+		try {
+			return new Socket("127.0.0.1", 56);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			System.out.println("無法連線至local 改成連線至遠端");
+			return connectToRemote();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Socket connectToRemote() {
+		try {
+			return new Socket("123.204.84.144", 56);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private void connectToServer() {
@@ -117,7 +145,10 @@ public class Connecter extends Observable implements Observer {
 					playRoom.setPlayerBInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
 					if (serverMsg.get("team").toString().equals("1")) {
 						playRoom.changePlay();
+						playRoom.setWhichTeam(1);
 					}
+					playRoom.getLoadingFrame().setVisible(false);
+					playRoom.getLoadingFrame().dispose();
 					playRoom.setVisible(true);
 				} else if (serverMsg.get("action").equals("winAndLose")) {
 					System.out.println("get player win and lose info from server");
