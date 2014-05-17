@@ -28,6 +28,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	private int chessBoardWidth, chessBoardHeight;
 	private GameObservable obs;
 	private int playerTeam = 3;
+	private ArrayList<Chess> chessBox;
 
 	public ChineseChessBoard(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -35,6 +36,7 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 		setLocation(locationX, locationY);
 		setLayout(null);
 
+		chessBox = new ArrayList<Chess>();
 		obs = new GameObservable();
 
 		chessBoardWidth = width;
@@ -173,10 +175,18 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 					add(chess);
 					chess.addMouseListener(this);
 					chess.addMouseMotionListener(this);
+					chessBox.add(chess);
 				}
 				repaint();
 				revalidate();
 			}
+		}
+	}
+
+	public void removeChessListener() {
+		for (Chess chess : chessBox) {
+			chess.removeMouseListener(this);
+			chess.removeMouseMotionListener(this);
 		}
 	}
 

@@ -11,6 +11,8 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -110,6 +112,7 @@ public class Connecter extends Observable implements Observer {
 					if (x == toX && y == toY) {
 						System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
 						chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
+						JOptionPane.showMessageDialog(null, "不能這樣下", "錯誤下法", JOptionPane.WARNING_MESSAGE);
 					} else {
 						System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
 						chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
@@ -122,7 +125,8 @@ public class Connecter extends Observable implements Observer {
 					String chat = (String) serverMsg.get("chat msg");
 					playRoom.appendChatArea(chat);
 				} else if (serverMsg.get("action").equals("sayBye")) {
-
+					playRoom.getChessBoard().removeChessListener();
+					JOptionPane.showMessageDialog(null, "對方已經離開", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
 				} else if (serverMsg.get("action").equals("get info")) {
 					JSONObject sendToServer = new JSONObject();
 					sendToServer.put("action", "give info");
@@ -157,6 +161,14 @@ public class Connecter extends Observable implements Observer {
 					System.out.println(serverMsg.get("player lose").toString() + "\n");
 					playRoom.setPlayerAInfoLose(Integer.valueOf(serverMsg.get("player lose").toString()));
 					playRoom.setPlayerAInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
+				} else if (serverMsg.get("action").equals("win")) {
+					playRoom.getChessBoard().removeChessListener();
+					JOptionPane.showMessageDialog(null, "您獲勝了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("you win");
+				} else if (serverMsg.get("action").equals("lose")) {
+					playRoom.getChessBoard().removeChessListener();
+					JOptionPane.showMessageDialog(null, "您輸了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("you lose");
 				}
 			}
 		} catch (JSONException e) {

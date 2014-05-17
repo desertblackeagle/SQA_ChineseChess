@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import ui.ChatPanel;
+import ui.dialog.ExitDialog;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 
 public class ChatAndPlayInfo extends JPanel {
@@ -42,7 +43,8 @@ public class ChatAndPlayInfo extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getActionCommand().equals("離開")) {
-					System.exit(0);
+					ExitDialog exitConfirm = new ExitDialog();
+//					System.exit(0);
 				}
 			}
 		};
