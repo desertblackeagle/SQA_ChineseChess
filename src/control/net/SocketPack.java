@@ -1,4 +1,4 @@
-package net;
+package control.net;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

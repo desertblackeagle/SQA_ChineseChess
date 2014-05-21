@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
-import net.Connecter;
 import ui.ChatPanel;
 import ui.LodingFrame;
 import ui.ParentFrame;
@@ -24,6 +23,7 @@ import ui.playRoom.viewpanel.ViewPanel;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.ChatAndPlayInfo;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 import control.GameObservable;
+import control.net.Connecter;
 
 public class PlayRoom extends ParentFrame implements Observer {
 	private JLabel background, exit, narrow, logo;
