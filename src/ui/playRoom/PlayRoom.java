@@ -13,6 +13,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import ui.ChatPanel;
@@ -23,6 +24,8 @@ import ui.playRoom.viewpanel.ViewPanel;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.ChatAndPlayInfo;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 import control.GameObservable;
+import control.GameTimeListener;
+import control.GameTimer;
 import control.net.Connecter;
 
 public class PlayRoom extends ParentFrame implements Observer {
@@ -37,6 +40,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 	private GameObservable obs;
 	private int playerTeam = 0;// red 0 black 1 block 3
 	private LodingFrame loadingFrame;
+	private GameTimer playTooLong = new GameTimer();
 
 	public PlayRoom(String APIToken, String userToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
@@ -46,7 +50,8 @@ public class PlayRoom extends ParentFrame implements Observer {
 		initFrame();
 		initBackground();
 		initBound();
-
+		initGameTimer();
+		
 		obs = new GameObservable();
 
 		revalidate();
@@ -73,6 +78,24 @@ public class PlayRoom extends ParentFrame implements Observer {
 		setPlayerTeam(1);
 	}
 
+	private void initGameTimer(){
+		playTooLong.addTimeListener(new GameTimeListener() {
+
+			@Override
+			public void timeOut() {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "已經過了一小時，你玩太久囉!!!!", "提醒", JOptionPane.INFORMATION_MESSAGE);
+				playTooLong.startTimer(3600);
+			}
+
+			@Override
+			public void onChange(long sec) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+	
 	// 設置關閉和縮小的listener
 	private void initMouseAdapter() {
 		mouseForExitNarrow = new MouseAdapter() {
@@ -253,6 +276,10 @@ public class PlayRoom extends ParentFrame implements Observer {
 
 	public ChineseChessBoard getChessBoard() {
 		return chessBoard;
+	}
+
+	public GameTimer getPlayTooLong() {
+		return playTooLong;
 	}
 
 	public LodingFrame getLoadingFrame() {

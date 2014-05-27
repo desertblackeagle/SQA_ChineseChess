@@ -76,7 +76,7 @@ public class Connecter extends Observable implements Observer {
 			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 			System.out.println("無法連線至local 改成連線至遠端");
 			return connectToRemote();
 		}
@@ -88,11 +88,12 @@ public class Connecter extends Observable implements Observer {
 			return new Socket("123.204.84.144", 56);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 			System.out.println("所有Server接連線失敗");
+			JOptionPane.showMessageDialog(null, "無法連上Server", "提醒", JOptionPane.ERROR_MESSAGE);
 		}
 		return null;
 	}
@@ -155,6 +156,7 @@ public class Connecter extends Observable implements Observer {
 					playRoom.getLoadingFrame().setVisible(false);
 					playRoom.getLoadingFrame().dispose();
 					playRoom.setVisible(true);
+					playRoom.getPlayTooLong().startTimer(3600);
 				} else if (serverMsg.get("action").equals("winAndLose")) {
 					System.out.println("get player win and lose info from server");
 					System.out.println(serverMsg.get("player win").toString());

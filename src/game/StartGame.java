@@ -15,22 +15,6 @@ public class StartGame {
 
 	public StartGame(String APIToken, String userToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
-		GameTimer playTooLong = new GameTimer();
-		playTooLong.addTimeListener(new GameTimeListener() {
-
-			@Override
-			public void timeOut() {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(null, "已經過了一小時，你玩太久囉!!!!", "提醒", JOptionPane.INFORMATION_MESSAGE);
-			}
-
-			@Override
-			public void onChange(long sec) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		playTooLong.startTimer(10);
 		PlayRoom playRoom = new PlayRoom(APIToken, userToken, playerAName, playerPhoto);
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);
@@ -58,10 +42,10 @@ public class StartGame {
 
 //		new StartGame(APIToken, userToken, playerAName, playerPhoto);
 
-		APIToken = "83d25eaeb2cebf405adc604f9262c660b6ce2d8d83687dfb01d4226ff027a049dd15d102fda255f9d5c810f83f63b81aaa66";
-		userToken = "1";
-		playerAName = "fcuA";
-		playerPhoto = "http://simswiki.info/images/3/30/Windows_Logo.png";
+//		APIToken = "83d25eaeb2cebf405adc604f9262c660b6ce2d8d83687dfb01d4226ff027a049dd15d102fda255f9d5c810f83f63b81aaa66";
+//		userToken = "1";
+//		playerAName = "fcuA";
+//		playerPhoto = "http://simswiki.info/images/3/30/Windows_Logo.png";
 
 		new StartGame(APIToken, userToken, playerAName, playerPhoto);
 
