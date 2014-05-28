@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ui.LoseFrame;
+import ui.WinFrame;
 import ui.playRoom.PlayRoom;
 import control.TransferAbsoluteToXY;
 import data.chess.Chess;
@@ -27,17 +29,17 @@ public class Connecter extends Observable implements Observer {
 	private PrintStream serverWriter;
 	private ChessXYLocOnChessBoard chessXYLocOnChessBoard;
 	private String APIToken_C;
-	private String userToken_C;
+	private String secreatToken_C;
 	private String playerAName_C;
 	private String playerPhoto_C;
 	private PlayRoom playRoom;
 
-	public Connecter(PlayRoom playRoom, ChessXYLocOnChessBoard chessXYLocOnChessBoard, String APIToken, String userToken, String playerAName, String playerPhoto) {
+	public Connecter(PlayRoom playRoom, ChessXYLocOnChessBoard chessXYLocOnChessBoard, String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
 		this.chessXYLocOnChessBoard = chessXYLocOnChessBoard;
 		this.playRoom = playRoom;
 		APIToken_C = APIToken;
-		userToken_C = userToken;
+		secreatToken_C = secreatToken;
 		playerAName_C = playerAName;
 		playerPhoto_C = playerPhoto;
 		new Thread(new Runnable() {
@@ -54,7 +56,7 @@ public class Connecter extends Observable implements Observer {
 					JSONObject check = new JSONObject();
 					check.put("action", "check");
 					check.put("API Token", APIToken_C);
-					check.put("User Token", userToken_C);
+					check.put("secreatToken", secreatToken_C);
 					serverWriter.println(check.toString());
 					System.out.println("send check info to server : " + check);
 					connectToServer();
@@ -132,7 +134,7 @@ public class Connecter extends Observable implements Observer {
 					JSONObject sendToServer = new JSONObject();
 					sendToServer.put("action", "give info");
 					sendToServer.put("API Token", APIToken_C);
-					sendToServer.put("User Token", userToken_C);
+					sendToServer.put("secreatToken", secreatToken_C);
 					sendToServer.put("player name", playerAName_C);
 					sendToServer.put("player photo", playerPhoto_C);
 					serverWriter.println(sendToServer.toString());
@@ -165,12 +167,30 @@ public class Connecter extends Observable implements Observer {
 					playRoom.setPlayerAInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
 				} else if (serverMsg.get("action").equals("win")) {
 					playRoom.getChessBoard().removeChessListener();
-					JOptionPane.showMessageDialog(null, "您獲勝了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
+					WinFrame winFrame = new WinFrame();
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					winFrame.dispose();
+//					JOptionPane.showMessageDialog(null, "您獲勝了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
 					System.out.println("you win");
 				} else if (serverMsg.get("action").equals("lose")) {
 					playRoom.getChessBoard().removeChessListener();
-					JOptionPane.showMessageDialog(null, "您輸了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
+					LoseFrame loseFrame = new LoseFrame();
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					loseFrame.dispose();
+//					JOptionPane.showMessageDialog(null, "您輸了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
 					System.out.println("you lose");
+				} else if (serverMsg.get("action").equals("check fail")) {
+					JOptionPane.showMessageDialog(null, "非法登入", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		} catch (JSONException e) {

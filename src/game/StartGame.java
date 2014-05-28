@@ -13,13 +13,13 @@ import data.MainData;
 
 public class StartGame {
 
-	public StartGame(String APIToken, String userToken, String playerAName, String playerPhoto) {
+	public StartGame(String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
-		PlayRoom playRoom = new PlayRoom(APIToken, userToken, playerAName, playerPhoto);
+		PlayRoom playRoom = new PlayRoom(APIToken, secreatToken, playerAName, playerPhoto);
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);
 		Controler controler = new Controler(chessBoardWidth, chessBoardHeight);
-		Connecter connecter = new Connecter(playRoom, data.getChessXYLoc(), APIToken, userToken, playerAName, playerPhoto);
+		Connecter connecter = new Connecter(playRoom, data.getChessXYLoc(), APIToken, secreatToken, playerAName, playerPhoto);
 
 		// set observer observable
 		controler.getTransferAbsoluteToXY().addObserver(connecter);
@@ -35,8 +35,8 @@ public class StartGame {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String APIToken = args[0];
-		APIToken = APIToken + String.valueOf((new Random().nextInt(1000)));
-		String userToken = args[1];
+//		APIToken = APIToken + String.valueOf((new Random().nextInt(1000)));
+		String secreatToken = args[1];
 		String playerAName = args[2];
 		String playerPhoto = args[3];
 
@@ -47,7 +47,7 @@ public class StartGame {
 //		playerAName = "fcuA";
 //		playerPhoto = "http://simswiki.info/images/3/30/Windows_Logo.png";
 
-		new StartGame(APIToken, userToken, playerAName, playerPhoto);
+		new StartGame(APIToken, secreatToken, playerAName, playerPhoto);
 
 //		APIToken = "b123456789123456789123456788";
 //		userToken = "2";

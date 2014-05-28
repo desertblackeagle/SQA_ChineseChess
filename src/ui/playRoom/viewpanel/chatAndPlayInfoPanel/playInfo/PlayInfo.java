@@ -2,9 +2,11 @@ package ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,6 +74,7 @@ public class PlayInfo extends JPanel {
 		ImageIcon photo = null;
 		try {
 			photo = new ImageIcon(new URL(photoUrl));
+
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

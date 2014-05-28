@@ -42,7 +42,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 	private LodingFrame loadingFrame;
 	private GameTimer playTooLong = new GameTimer();
 
-	public PlayRoom(String APIToken, String userToken, String playerAName, String playerPhoto) {
+	public PlayRoom(String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
 		setVisible(false);
 		loadingFrame = new LodingFrame();
