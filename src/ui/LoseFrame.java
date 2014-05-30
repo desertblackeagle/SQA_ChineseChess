@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class LoseFrame extends ParentFrame {
@@ -15,6 +16,7 @@ public class LoseFrame extends ParentFrame {
 		// TODO Auto-generated constructor stub
 		initLabel();
 		initBounds();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	private void initLabel() {

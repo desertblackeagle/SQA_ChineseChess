@@ -56,11 +56,8 @@ public class PlayRoom extends ParentFrame implements Observer {
 		revalidate();
 		repaint();
 		getAndSetAllComponent();
-//		testDrive();
 		setPlayerAInfoName(playerAName);
-		System.out.println("set name");
 		setPlayerAPhoto(playerPhoto);
-		System.out.println("set photo");
 	}
 
 	private void initGameTimer() {
@@ -76,7 +73,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 			@Override
 			public void onChange(long sec) {
 				// TODO Auto-generated method stub
-
+				
 			}
 		});
 	}

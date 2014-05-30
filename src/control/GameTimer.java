@@ -42,7 +42,7 @@ public class GameTimer {
 						listener.onChange(sec);
 					}
 					if (sec <= 0) {
-						stopoTimer();
+						stopTimer();
 						if (listener != null) {
 							listener.timeOut();
 						}
@@ -60,32 +60,32 @@ public class GameTimer {
 	 * 
 	 * @param s
 	 */
-	public void stopoTimer() {
+	public void stopTimer() {
 		if (timer != null) {
 			timer.cancel();
 			timer = null;
 		}
 	}
 
-	public static void main(String[] args) {
-
-		// 範例
-
-		GameTimer timer = new GameTimer();
-		// 傾聽計時器timeout事件(可選的事件，不實作也可以使用timer
-		timer.addTimeListener(new GameTimeListener() {
-			@Override
-			public void timeOut() {
-				// 處理TimeOut事件
-				System.out.println("it is to late");
-			}
-
-			@Override
-			public void onChange(long sec) {
-				System.out.println("sec=>" + sec);
-			}
-		});
-		timer.startTimer(1);
-	}
+//	public static void main(String[] args) {
+//
+//		// 範例
+//
+//		GameTimer timer = new GameTimer();
+//		// 傾聽計時器timeout事件(可選的事件，不實作也可以使用timer
+//		timer.addTimeListener(new GameTimeListener() {
+//			@Override
+//			public void timeOut() {
+//				// 處理TimeOut事件
+//				System.out.println("it is to late");
+//			}
+//
+//			@Override
+//			public void onChange(long sec) {
+//				System.out.println("sec=>" + sec);
+//			}
+//		});
+//		timer.startTimer(1);
+//	}
 
 }

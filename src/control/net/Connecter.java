@@ -75,7 +75,6 @@ public class Connecter extends Observable implements Observer {
 			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			System.out.println("無法連線至local 改成連線至遠端");
 			return connectToRemote();
 		}
@@ -87,10 +86,8 @@ public class Connecter extends Observable implements Observer {
 			return new Socket("123.204.84.144", 56);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			System.out.println("所有Server接連線失敗");
 			JOptionPane.showMessageDialog(null, "無法連上Server", "提醒", JOptionPane.ERROR_MESSAGE);
 		}
@@ -173,7 +170,6 @@ public class Connecter extends Observable implements Observer {
 							e.printStackTrace();
 						}
 						winFrame.dispose();
-//					JOptionPane.showMessageDialog(null, "您獲勝了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println("you win");
 					} else if (serverMsg.get("action").equals("lose")) {
 						playRoom.getChessBoard().removeChessListener();
@@ -185,10 +181,9 @@ public class Connecter extends Observable implements Observer {
 							e.printStackTrace();
 						}
 						loseFrame.dispose();
-//					JOptionPane.showMessageDialog(null, "您輸了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println("you lose");
 					} else if (serverMsg.get("action").equals("check fail")) {
-						JOptionPane.showMessageDialog(null, "非法登入", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "非法登入，五秒後自動關閉!!!!", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
 						try {
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
@@ -197,7 +192,6 @@ public class Connecter extends Observable implements Observer {
 						}
 						System.exit(1);
 					}
-
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

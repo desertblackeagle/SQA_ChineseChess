@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class WinFrame extends ParentFrame {
@@ -15,6 +16,7 @@ public class WinFrame extends ParentFrame {
 		// TODO Auto-generated constructor stub
 		initLabel();
 		initBounds();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	private void initLabel() {
@@ -35,10 +37,5 @@ public class WinFrame extends ParentFrame {
 
 	private void initBounds() {
 		background.setBounds(0, 0, getWidth(), getHeight());
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		WinFrame l = new WinFrame();
 	}
 }
