@@ -63,22 +63,6 @@ public class PlayRoom extends ParentFrame implements Observer {
 		System.out.println("set photo");
 	}
 
-	private void testDrive() {
-		changePlay();
-		appendChatArea("Rose > Hello !");
-
-		setPlayerAPhoto("http://img.kanzhongguo.com/dat/media/15/2010/12/06/20101206021518227.jpg");
-		setPlayerAInfoWin(51);
-		setPlayerAInfoLose(0);
-		setPlayerAInfoName("Rose");
-
-		setPlayerBPhoto("http://img.kanzhongguo.com/dat/media/15/2010/12/06/20101206021518227.jpg");
-		setPlayerBInfoWin(1000);
-		setPlayerBInfoLose(0);
-		setPlayerBInfoName("God");
-		setPlayerTeam(1);
-	}
-
 	private void initGameTimer() {
 		playTooLong.addTimeListener(new GameTimeListener() {
 

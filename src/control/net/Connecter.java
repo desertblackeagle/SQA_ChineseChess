@@ -46,10 +46,6 @@ public class Connecter extends Observable implements Observer {
 		new Thread(new Runnable() {
 			public void run() {
 				try {
-//					client = new Socket("123.204.84.144", 56);
-//					client = new Socket("127.0.0.1", 56);
-//					client = new Socket("192.168.1.239", 56);
-//					client = new Socket("192.168.1.109", 56);
 					client = connectToLocal();
 					serverReader = new BufferedReader(new InputStreamReader(client.getInputStream(), "utf-8"));
 					serverWriter = new PrintStream(client.getOutputStream(), true, "utf-8");

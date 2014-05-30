@@ -131,7 +131,6 @@ public class ChineseChessBoard extends JPanel implements MouseMotionListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-//		System.out.println(e.getX() + " " + e.getY());
 	}
 
 	@Override
