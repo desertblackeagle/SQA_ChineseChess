@@ -3,20 +3,23 @@ package ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import control.net.ImageDownload;
 
 public class PlayInfo extends JPanel {
 	private JLabel playerPhoto;
 	private ImageIcon photo;
 	private LineBorder border;
 	private IndividualInfo playerIndividualInfo;
+	private ImageDownload imgDown;
 
 	public PlayInfo(int locationX, int locationY, int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -72,12 +75,24 @@ public class PlayInfo extends JPanel {
 
 	public void setPlayerPhoto(String photoUrl) {
 		ImageIcon photo = null;
-		try {
-			photo = new ImageIcon(new URL(photoUrl));
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (photoUrl.substring(0, 5).equals("https")) {
+			try {
+				imgDown = new ImageDownload();
+				photo = new ImageIcon(imgDown.download(photoUrl));
+			} catch (ConnectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				photo = new ImageIcon(new URL(photoUrl));
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if (photo == null) {
 			java.net.URL imUrl = getClass().getResource("/image/");

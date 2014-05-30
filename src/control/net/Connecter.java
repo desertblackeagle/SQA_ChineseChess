@@ -4,8 +4,6 @@ import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -13,9 +11,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JOptionPane;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import ui.LoseFrame;
 import ui.WinFrame;
@@ -62,7 +57,7 @@ public class Connecter extends Observable implements Observer {
 					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e.printStackTrace(); 
 				}
 			}
 		}).start();
