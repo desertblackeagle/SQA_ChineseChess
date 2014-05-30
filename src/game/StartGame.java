@@ -1,13 +1,7 @@
 package game;
 
-import java.util.Random;
-
-import javax.swing.JOptionPane;
-
 import ui.playRoom.PlayRoom;
 import control.Controler;
-import control.GameTimeListener;
-import control.GameTimer;
 import control.net.Connecter;
 import data.MainData;
 
@@ -15,12 +9,16 @@ public class StartGame {
 
 	public StartGame(String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
+		System.out.println("playing");
 		PlayRoom playRoom = new PlayRoom(APIToken, secreatToken, playerAName, playerPhoto);
+		System.out.println("playroom");
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);
+		System.out.println("MainData");
 		Controler controler = new Controler(chessBoardWidth, chessBoardHeight);
+		System.out.println("Controler");
 		Connecter connecter = new Connecter(playRoom, data.getChessXYLoc(), APIToken, secreatToken, playerAName, playerPhoto);
-
+		System.out.println("Connecter");
 		// set observer observable
 		controler.getTransferAbsoluteToXY().addObserver(connecter);
 		connecter.addObserver(playRoom);
@@ -39,7 +37,7 @@ public class StartGame {
 		String secreatToken = args[1];
 		String playerAName = args[2];
 		String playerPhoto = args[3];
-
+		System.out.println("args");
 //		new StartGame(APIToken, userToken, playerAName, playerPhoto);
 
 //		APIToken = "83d25eaeb2cebf405adc604f9262c660b6ce2d8d83687dfb01d4226ff027a049dd15d102fda255f9d5c810f83f63b81aaa66";
@@ -48,7 +46,7 @@ public class StartGame {
 //		playerPhoto = "http://simswiki.info/images/3/30/Windows_Logo.png";
 
 		new StartGame(APIToken, secreatToken, playerAName, playerPhoto);
-
+		System.out.println("new ");
 //		APIToken = "b123456789123456789123456788";
 //		userToken = "2";
 //		playerAName = "fcuB";

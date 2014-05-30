@@ -1,5 +1,6 @@
 package control.net;
 
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -104,103 +105,118 @@ public class Connecter extends Observable implements Observer {
 		String serverInput;
 		try {
 			while ((serverInput = serverReader.readLine()) != null) {
-				Thread.interrupted();
-				System.out.println("message from server : " + serverInput);
-				JSONObject serverMsg = new JSONObject(serverInput);
-				if (serverMsg.get("action").equals("move")) {
-					int x = (Integer) serverMsg.get("chess X");
-					int y = (Integer) serverMsg.get("chess Y");
-					int toX = (Integer) serverMsg.get("chess toX");
-					int toY = (Integer) serverMsg.get("chess toY");
-					if (x == toX && y == toY) {
-						System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
-						chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
-						JOptionPane.showMessageDialog(null, "不能這樣下", "錯誤下法", JOptionPane.WARNING_MESSAGE);
-					} else {
-						System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
-						chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
-						chessXYLocOnChessBoard.getChess(x, y).setChessLocX(toX);
-						chessXYLocOnChessBoard.getChess(x, y).setChessLocY(toY);
-						chessXYLocOnChessBoard.setChess(x, y, toX, toY);
-						playRoom.changePlay();
-					}
-				} else if (serverMsg.get("action").equals("chat")) {
-					String chat = (String) serverMsg.get("chat msg");
-					playRoom.appendChatArea(chat);
-				} else if (serverMsg.get("action").equals("sayBye")) {
-					playRoom.getChessBoard().removeChessListener();
-					JOptionPane.showMessageDialog(null, "對方已經離開", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
-				} else if (serverMsg.get("action").equals("get info")) {
-					JSONObject sendToServer = new JSONObject();
-					sendToServer.put("action", "give info");
-					sendToServer.put("API Token", APIToken_C);
-					sendToServer.put("secreatToken", secreatToken_C);
-					sendToServer.put("player name", playerAName_C);
-					sendToServer.put("player photo", playerPhoto_C);
-					serverWriter.println(sendToServer.toString());
-					System.out.println("client send info to server : " + sendToServer);
-				} else if (serverMsg.get("action").equals("rival info")) {
-					System.out.println("get rival info from server");
-					System.out.println(serverMsg.get("player name").toString());
-					System.out.println(serverMsg.get("player photo").toString());
-					System.out.println(serverMsg.get("player win").toString());
-					System.out.println(serverMsg.get("player lose").toString());
-					System.out.println(serverMsg.get("team").toString() + "\n");
-					playRoom.setPlayerBInfoName(serverMsg.get("player name").toString());
-					playRoom.setPlayerBPhoto(serverMsg.get("player photo").toString());
-					playRoom.setPlayerTeam((Integer) serverMsg.get("team"));
-					playRoom.setPlayerBInfoLose(Integer.valueOf(serverMsg.get("player lose").toString()));
-					playRoom.setPlayerBInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
-					if (serverMsg.get("team").toString().equals("1")) {
-						playRoom.changePlay();
-						playRoom.setWhichTeam(1);
-					}
-					playRoom.getLoadingFrame().setVisible(false);
-					playRoom.getLoadingFrame().dispose();
-					playRoom.setVisible(true);
-					playRoom.getPlayTooLong().startTimer(3600);
-				} else if (serverMsg.get("action").equals("winAndLose")) {
-					System.out.println("get player win and lose info from server");
-					System.out.println(serverMsg.get("player win").toString());
-					System.out.println(serverMsg.get("player lose").toString() + "\n");
-					playRoom.setPlayerAInfoLose(Integer.valueOf(serverMsg.get("player lose").toString()));
-					playRoom.setPlayerAInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
-				} else if (serverMsg.get("action").equals("win")) {
-					playRoom.getChessBoard().removeChessListener();
-					WinFrame winFrame = new WinFrame();
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					winFrame.dispose();
+				try {
+					Thread.interrupted();
+					System.out.println("message from server : " + serverInput);
+					JSONObject serverMsg = new JSONObject(serverInput);
+					if (serverMsg.get("action").equals("move")) {
+						int x = (Integer) serverMsg.get("chess X");
+						int y = (Integer) serverMsg.get("chess Y");
+						int toX = (Integer) serverMsg.get("chess toX");
+						int toY = (Integer) serverMsg.get("chess toY");
+						if (x == toX && y == toY) {
+							System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
+							chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
+							JOptionPane.showMessageDialog(null, "不能這樣下", "錯誤下法", JOptionPane.WARNING_MESSAGE);
+						} else {
+							System.out.println("move chess : " + x + " " + y + " to " + toX + " " + toY);
+							chessXYLocOnChessBoard.getChess(x, y).setChessToXY(toX, toY);
+							chessXYLocOnChessBoard.getChess(x, y).setChessLocX(toX);
+							chessXYLocOnChessBoard.getChess(x, y).setChessLocY(toY);
+							chessXYLocOnChessBoard.setChess(x, y, toX, toY);
+							playRoom.changePlay();
+						}
+					} else if (serverMsg.get("action").equals("chat")) {
+						String chat = (String) serverMsg.get("chat msg");
+						playRoom.appendChatArea(chat);
+					} else if (serverMsg.get("action").equals("sayBye")) {
+						playRoom.getChessBoard().removeChessListener();
+						JOptionPane.showMessageDialog(null, "對方已經離開", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
+					} else if (serverMsg.get("action").equals("get info")) {
+						JSONObject sendToServer = new JSONObject();
+						sendToServer.put("action", "give info");
+						sendToServer.put("API Token", APIToken_C);
+						sendToServer.put("secreatToken", secreatToken_C);
+						sendToServer.put("player name", playerAName_C);
+						sendToServer.put("player photo", playerPhoto_C);
+						serverWriter.println(sendToServer.toString());
+						System.out.println("client send info to server : " + sendToServer);
+					} else if (serverMsg.get("action").equals("rival info")) {
+						System.out.println("get rival info from server");
+						System.out.println(serverMsg.get("player name").toString());
+						System.out.println(serverMsg.get("player photo").toString());
+						System.out.println(serverMsg.get("player win").toString());
+						System.out.println(serverMsg.get("player lose").toString());
+						System.out.println(serverMsg.get("team").toString() + "\n");
+						playRoom.setPlayerBInfoName(serverMsg.get("player name").toString());
+						playRoom.setPlayerBPhoto(serverMsg.get("player photo").toString());
+						playRoom.setPlayerTeam((Integer) serverMsg.get("team"));
+						playRoom.setPlayerBInfoLose(Integer.valueOf(serverMsg.get("player lose").toString()));
+						playRoom.setPlayerBInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
+						if (serverMsg.get("team").toString().equals("1")) {
+							playRoom.changePlay();
+							playRoom.setWhichTeam(1);
+						}
+						playRoom.getLoadingFrame().setVisible(false);
+						playRoom.getLoadingFrame().dispose();
+						playRoom.setVisible(true);
+						playRoom.getPlayTooLong().startTimer(3600);
+					} else if (serverMsg.get("action").equals("winAndLose")) {
+						System.out.println("get player win and lose info from server");
+						System.out.println(serverMsg.get("player win").toString());
+						System.out.println(serverMsg.get("player lose").toString() + "\n");
+						playRoom.setPlayerAInfoLose(Integer.valueOf(serverMsg.get("player lose").toString()));
+						playRoom.setPlayerAInfoWin(Integer.valueOf(serverMsg.get("player win").toString()));
+					} else if (serverMsg.get("action").equals("win")) {
+						playRoom.getChessBoard().removeChessListener();
+						WinFrame winFrame = new WinFrame();
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						winFrame.dispose();
 //					JOptionPane.showMessageDialog(null, "您獲勝了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
-					System.out.println("you win");
-				} else if (serverMsg.get("action").equals("lose")) {
-					playRoom.getChessBoard().removeChessListener();
-					LoseFrame loseFrame = new LoseFrame();
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					loseFrame.dispose();
+						System.out.println("you win");
+					} else if (serverMsg.get("action").equals("lose")) {
+						playRoom.getChessBoard().removeChessListener();
+						LoseFrame loseFrame = new LoseFrame();
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						loseFrame.dispose();
 //					JOptionPane.showMessageDialog(null, "您輸了", "遊戲資訊", JOptionPane.INFORMATION_MESSAGE);
-					System.out.println("you lose");
-				} else if (serverMsg.get("action").equals("check fail")) {
-					JOptionPane.showMessageDialog(null, "非法登入", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
+						System.out.println("you lose");
+					} else if (serverMsg.get("action").equals("check fail")) {
+						JOptionPane.showMessageDialog(null, "非法登入", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.exit(1);
+					}
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-		} catch (JSONException e) {
+		} catch (HeadlessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override

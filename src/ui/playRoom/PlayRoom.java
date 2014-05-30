@@ -51,7 +51,6 @@ public class PlayRoom extends ParentFrame implements Observer {
 		initBackground();
 		initBound();
 		initGameTimer();
-		
 		obs = new GameObservable();
 
 		revalidate();
@@ -59,7 +58,9 @@ public class PlayRoom extends ParentFrame implements Observer {
 		getAndSetAllComponent();
 //		testDrive();
 		setPlayerAInfoName(playerAName);
+		System.out.println("set name");
 		setPlayerAPhoto(playerPhoto);
+		System.out.println("set photo");
 	}
 
 	private void testDrive() {
@@ -78,7 +79,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 		setPlayerTeam(1);
 	}
 
-	private void initGameTimer(){
+	private void initGameTimer() {
 		playTooLong.addTimeListener(new GameTimeListener() {
 
 			@Override
@@ -95,7 +96,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 			}
 		});
 	}
-	
+
 	// 設置關閉和縮小的listener
 	private void initMouseAdapter() {
 		mouseForExitNarrow = new MouseAdapter() {
