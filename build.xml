@@ -1,68 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="SQA_ChineseChess">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../Desktop/捷徑/eclipse"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
-    <path id="SQA_ChineseChess.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="../../../Desktop/JsonCom_fat.jar"/>
-        <pathelement location="../../2014三下/SQA/象棋專題/GUI皮膚/JTattooDemo/JTattoo-1.6.10.jar"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}" encoding="UTF-8">
-            <src path="src"/>
-            <classpath refid="SQA_ChineseChess.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="ConfigTest">
-        <java classname="game.ConfigTest" failonerror="true" fork="yes">
-            <classpath refid="SQA_ChineseChess.classpath"/>
-        </java>
-    </target>
-    <target name="ImageDownload">
-        <java classname="control.net.ImageDownload" failonerror="true" fork="yes">
-            <classpath refid="SQA_ChineseChess.classpath"/>
-        </java>
-    </target>
-    <target name="StartGame">
-        <java classname="game.StartGame" failonerror="true" fork="yes">
-            <arg line="32139e4848b4af382ae517b26a8f29850585e248bc074e50cbcd0e5053da8a4241c90b1b042ad9751a0ebafc6da55eb167d8 57cb051d817006c0ad6e93279d9fc4a366a58ad376ccfff8723ecfd73544d4b997d564503ac123c45c9e6db88a5fc5f4e2f4 bot1 http://s52.podbean.com/pb/ae2e39cab848e012d58ff3ab927952e7/5385fd80/data1/blogs60/646944/uploads/facebook_icon_small_png_4aabf4af53.png"/>
-            <classpath refid="SQA_ChineseChess.classpath"/>
-        </java>
-    </target>
+<!-- WARNING: Eclipse auto-generated file. Any modifications will be overwritten. 
+	To include a user specific buildfile here, simply create one in the same 
+	directory with the processing instruction <?eclipse.ant.import?> as the first 
+	entry and export the buildfile again. -->
+<project basedir="." default="build" name="SQA_ChineseChess">
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../../Desktop/捷徑/eclipse" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	<property name="Json" value="../../../Desktop/JsonCom_fat.jar" " />
+	<path id="SQA_ChineseChess.classpath">
+		<pathelement location="bin" />
+		<pathelement location="../../../Desktop/JsonCom_fat.jar" />
+		<pathelement
+			location="../../2014三下/SQA/象棋專題/GUI皮膚/JTattooDemo/JTattoo-1.6.10.jar" />
+	</path>
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+	<target depends="clean" name="cleanall" />
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin"
+			includeantruntime="false" source="${source}" target="${target}"
+			encoding="UTF-8">
+			<src path="src" />
+			<classpath refid="SQA_ChineseChess.classpath" />
+		</javac>
+	</target>
+	<target
+		description="Build all projects which reference this project. Useful to propagate changes."
+		name="build-refprojects" />
+	<target description="copy Eclipse compiler jars to ant lib directory"
+		name="init-eclipse-compiler">
+		<copy todir="${ant.library.dir}">
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</copy>
+		<unzip dest="${ant.library.dir}">
+			<patternset includes="jdtCompilerAdapter.jar" />
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</unzip>
+	</target>
+	<target description="compile project with Eclipse compiler"
+		name="build-eclipse-compiler">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<antcall target="build" />
+	</target>
+	<target name="ConfigTest">
+		<java classname="game.ConfigTest" failonerror="true" fork="yes">
+			<classpath refid="SQA_ChineseChess.classpath" />
+		</java>
+	</target>
+	<target name="ImageDownload">
+		<java classname="control.net.ImageDownload" failonerror="true"
+			fork="yes">
+			<classpath refid="SQA_ChineseChess.classpath" />
+		</java>
+	</target>
+	<target name="StartGame">
+		<java classname="game.StartGame" failonerror="true" fork="yes">
+			<arg
+				line="32139e4848b4af382ae517b26a8f29850585e248bc074e50cbcd0e5053da8a4241c90b1b042ad9751a0ebafc6da55eb167d8 57cb051d817006c0ad6e93279d9fc4a366a58ad376ccfff8723ecfd73544d4b997d564503ac123c45c9e6db88a5fc5f4e2f4 bot1 http://s52.podbean.com/pb/ae2e39cab848e012d58ff3ab927952e7/5385fd80/data1/blogs60/646944/uploads/facebook_icon_small_png_4aabf4af53.png" />
+			<classpath refid="SQA_ChineseChess.classpath" />
+		</java>
+	</target>
 </project>
