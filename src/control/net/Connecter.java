@@ -12,6 +12,9 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import ui.LoseFrame;
 import ui.WinFrame;
 import ui.playRoom.PlayRoom;
@@ -57,7 +60,7 @@ public class Connecter extends Observable implements Observer {
 					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace(); 
+					e.printStackTrace();
 				}
 			}
 		}).start();
