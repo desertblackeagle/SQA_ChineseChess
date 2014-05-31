@@ -1,5 +1,6 @@
 package control.net;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
-
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 public class ImageDownload {
 	public byte[] download(String source) throws IOException, ConnectException {
@@ -33,30 +32,40 @@ public class ImageDownload {
 		HttpsURLConnection URLConn = (HttpsURLConnection) url.openConnection();
 		InputStream is = URLConn.getInputStream();
 		byte[] buffer = new byte[1024];
-		ByteOutputStream bos = new ByteOutputStream();
-		for (int length; (length = is.read(buffer)) > 0; bos.write(buffer, 0, length))
-			;
+
+		// 暫存BYTE陣列
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		// 緩衝
+		// 紀錄讀進來長度
+		int length = 0;
+		// 假如等於-1代表沒有資料了
+		while ((length = is.read(buffer)) != -1) {
+			// 從緩衝區讀取buffer裡面0~length-1的位置
+			baos.write(buffer, 0, length);
+		}
+		// ByteArrayOutputStream轉成位元陣列
+		byte data[] = baos.toByteArray();
 		is.close();
-		bos.close();
-		return bos.getBytes();
+		baos.close();
+		return data;
 	}
 
-//	public static void main(String[] args) {
-//		ImageDownload h = new ImageDownload();
-//
-//		try {
-//			FileOutputStream fos = new FileOutputStream("c:\\1.png");
-////			System.out.println(h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg"));
-//			byte[] buffer = h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg");
-//			fos.write(buffer);
-//			System.out.println(buffer.length);
-//			fos.close();
-//		} catch (ConnectException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String[] args) {
+		ImageDownload h = new ImageDownload();
+
+		try {
+			FileOutputStream fos = new FileOutputStream("c:\\1.png");
+//			System.out.println(h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg"));
+			byte[] buffer = h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg");
+			fos.write(buffer);
+			System.out.println(buffer.length);
+			fos.close();
+		} catch (ConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
