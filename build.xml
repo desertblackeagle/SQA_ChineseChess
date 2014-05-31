@@ -9,12 +9,14 @@
 	<property name="debuglevel" value="source,lines,vars" />
 	<property name="target" value="1.7" />
 	<property name="source" value="1.7" />
-	<property name="Json" value="../../../Desktop/JsonCom_fat.jar" />
 	<path id="SQA_ChineseChess.classpath">
 		<pathelement location="bin" />
 		<pathelement location="../../../Desktop/JsonCom_fat.jar" />
 		<pathelement
 			location="../../2014三下/SQA/象棋專題/GUI皮膚/JTattooDemo/JTattoo-1.6.10.jar" />
+		<fileset dir="../../../Desktop/">
+			<include name="*.jar" />
+		</fileset>
 	</path>
 	<target name="init">
 		<mkdir dir="bin" />
