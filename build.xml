@@ -14,7 +14,7 @@
 		<pathelement location="../../../Desktop/JsonCom_fat.jar" />
 		<pathelement
 			location="../../2014三下/SQA/象棋專題/GUI皮膚/JTattooDemo/JTattoo-1.6.10.jar" />
-		<fileset dir="../../../Desktop/">
+		<fileset dir="C:/Users/rose/Desktop">
 			<include name="*.jar" />
 		</fileset>
 	</path>
