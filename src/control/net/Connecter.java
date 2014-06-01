@@ -189,6 +189,8 @@ public class Connecter extends Observable implements Observer {
 							e.printStackTrace();
 						}
 						System.exit(1);
+					} else if (serverMsg.get("action").equals("is alive")) {
+						serverWriter.println("i am alive");
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -203,7 +205,16 @@ public class Connecter extends Observable implements Observer {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("server is shutdown");
+			JOptionPane.showMessageDialog(null, "與伺服器斷線 將在五秒後自動關閉!!!!", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.exit(1);
 		}
 	}
 
