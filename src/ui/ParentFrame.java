@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -23,6 +25,16 @@ public class ParentFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+
+        if (frameSize.height > screenSize.height)
+            frameSize.height = screenSize.height;
+        if (frameSize.width > screenSize.width)
+            frameSize.width = screenSize.width;
+
+        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
+		
 		// 可以拖曳視窗
 		this.addMouseListener(new MouseAdapter() {
 			@Override
