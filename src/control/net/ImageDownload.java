@@ -50,22 +50,4 @@ public class ImageDownload {
 		return data;
 	}
 
-	public static void main(String[] args) {
-		ImageDownload h = new ImageDownload();
-
-		try {
-			FileOutputStream fos = new FileOutputStream("c:\\1.png");
-//			System.out.println(h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg"));
-			byte[] buffer = h.download("https://sqa.swim-fish.info/media/uploaded_files/user/18fdd1ad6380f180dd42f87085ead66a48183f927e1ea0b1c22efa845015adb5/2014_05_21_4bfa431ae739ca227f4a10605fcaec6d.jpg");
-			fos.write(buffer);
-			System.out.println(buffer.length);
-			fos.close();
-		} catch (ConnectException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

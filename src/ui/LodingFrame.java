@@ -37,9 +37,4 @@ public class LodingFrame extends ParentFrame {
 		background.setBounds(0, 0, getWidth(), getHeight());
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		LodingFrame l = new LodingFrame();
-	}
-
 }

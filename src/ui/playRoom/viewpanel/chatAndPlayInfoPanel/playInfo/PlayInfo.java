@@ -55,7 +55,7 @@ public class PlayInfo extends JPanel {
 		playerIndividualInfo = new IndividualInfo(getHeight(), 0, getWidth() - getHeight(), getHeight());
 		playerIndividualInfo.setBorder(border);
 		add(playerIndividualInfo);
- 
+
 	}
 
 	private void initImageIcon() {

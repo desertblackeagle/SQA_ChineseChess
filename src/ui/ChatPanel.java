@@ -106,22 +106,6 @@ public class ChatPanel extends JPanel {
 		obs.addObserver(observer);
 	}
 
-	public int countObservers() {
-		return obs.countObservers();
-	}
-
-	public void deleteObserver(Observer observer) {
-		obs.deleteObserver(observer);
-	}
-
-	public void deleteObservers() {
-		obs.deleteObservers();
-	}
-
-	public void notifyObservers() {
-		obs.notifyObservers();
-	}
-
 	public void notifyObservers(Object o) {
 		obs.notifyObservers(o);
 	}

@@ -79,9 +79,4 @@ public class ExitDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ExitDialog m = new ExitDialog();
-	}
-
 }

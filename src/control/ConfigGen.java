@@ -62,9 +62,4 @@ public class ConfigGen {
 		return data;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ConfigGen c = new ConfigGen();
-		c.updateConfig("1", "123");
-	}
 }

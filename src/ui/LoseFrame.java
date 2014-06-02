@@ -39,8 +39,4 @@ public class LoseFrame extends ParentFrame {
 		background.setBounds(0, 0, getWidth(), getHeight());
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		LoseFrame l = new LoseFrame();
-	}
 }

@@ -29,10 +29,9 @@ import control.GameTimer;
 import control.net.Connecter;
 
 public class PlayRoom extends ParentFrame implements Observer {
-	private JLabel background, exit, narrow, logo;
+	private JLabel background, exit, narrow;
 	private ViewPanel viewPanel;
 	private MouseAdapter mouseForExitNarrow;
-	private ImageIcon logoIcon;
 	private ChatAndPlayInfo chatAndPlayInfo;
 	private ChatPanel chatPanel;
 	private PlayInfo playerAInfo, playerBInfo;
@@ -73,7 +72,7 @@ public class PlayRoom extends ParentFrame implements Observer {
 			@Override
 			public void onChange(long sec) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -130,13 +129,6 @@ public class PlayRoom extends ParentFrame implements Observer {
 //		narrow.setOpaque(true);
 		narrow.setForeground(Color.white);
 		narrow.addMouseListener(mouseForExitNarrow);
-
-		logoIcon = new ImageIcon("c:/sqa/wallpaper/logo.png");
-		logo = new JLabel(logoIcon);
-		logo.setSize(140, 120);
-		logo.setLocation(0, 0);
-		logoIcon.setImage(logoIcon.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
-		add(logo);
 	}
 
 	private void initBackground() {
