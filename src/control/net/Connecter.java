@@ -12,6 +12,8 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
+import log.Logger;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,12 +36,13 @@ public class Connecter extends Observable implements Observer {
 	private String playerPhoto_C;
 	private PlayRoom playRoom;
 	private String serverIp = "127.0.0.1";
+	private Logger logger;
 
 	public Connecter(PlayRoom playRoom, ChessXYLocOnChessBoard chessXYLocOnChessBoard, String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
 		this.chessXYLocOnChessBoard = chessXYLocOnChessBoard;
 		this.playRoom = playRoom;
-
+		logger = new Logger("client_connecter");
 		ConfigGen config = new ConfigGen();
 		serverIp = config.getConfig("serverIP");
 		APIToken_C = APIToken;
@@ -79,6 +82,7 @@ public class Connecter extends Observable implements Observer {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("無法連線至伺服器");
+			logger.log("無法連線至伺服器");
 		}
 		return null;
 	}
@@ -90,6 +94,7 @@ public class Connecter extends Observable implements Observer {
 				try {
 					Thread.interrupted();
 					System.out.println("message from server : " + serverInput);
+					logger.log("message from server : " + serverInput);
 					JSONObject serverMsg = new JSONObject(serverInput);
 					if (serverMsg.get("action").equals("move")) {
 						int x = (Integer) serverMsg.get("chess X");
@@ -186,24 +191,33 @@ public class Connecter extends Observable implements Observer {
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					logger.log(e.getMessage());
+					logger.log(e.getStackTrace().toString());
 				}
 			}
 		} catch (HeadlessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.log(e.getMessage());
+			logger.log(e.getStackTrace().toString());
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.log(e.getMessage());
+			logger.log(e.getStackTrace().toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
 			System.out.println("server is shutdown");
+			logger.log("server is shutdown");
 			JOptionPane.showMessageDialog(null, "與伺服器斷線 將在五秒後自動關閉!!!!", "遊戲資訊", JOptionPane.ERROR_MESSAGE);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				logger.log(e1.getMessage());
+				logger.log(e1.getStackTrace().toString());
 			}
 			System.exit(1);
 		}
@@ -218,6 +232,7 @@ public class Connecter extends Observable implements Observer {
 			sendToServer.put("chat msg", (String) arg);
 			serverWriter.println(sendToServer.toString());
 			System.out.println("client send chat to server : " + sendToServer);
+			logger.log("client send chat to server : " + sendToServer);
 		} else if (o instanceof TransferAbsoluteToXY) {
 			if (arg instanceof Chess) {
 				JSONObject sendToServer = new JSONObject();

@@ -30,7 +30,7 @@ public class DisplayComboBox extends JFrame {
 		setSize(400, 300);
 		setVisible(true);
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
 		if (frameSize.height > screenSize.height)
@@ -66,8 +66,8 @@ public class DisplayComboBox extends JFrame {
 			}
 		});
 		jp.setLayout(null);
-		combo.setFont(new Font("", Font.BOLD, 35));
-		combo.setBounds(getWidth() / 2 - 100, (getHeight() * 2 / 3) - 120, 200, 100);
+		combo.setFont(new Font("", Font.BOLD, 20));
+		combo.setBounds(getWidth() / 2 - 100, (getHeight() * 2 / 3) - 120, 200, 50);
 		jp.add(combo);
 		add(confirm);
 		add(msg);
