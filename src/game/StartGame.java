@@ -1,6 +1,7 @@
 package game;
 
 import ui.playRoom.PlayRoom;
+import control.ConfigGen;
 import control.Controler;
 import control.net.Connecter;
 import data.MainData;
@@ -9,6 +10,7 @@ public class StartGame {
 
 	public StartGame(String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
+
 		PlayRoom playRoom = new PlayRoom(APIToken, secreatToken, playerAName, playerPhoto);
 		int chessBoardWidth = playRoom.getChessBoard().getChessBoardWidth(), chessBoardHeight = playRoom.getChessBoard().getChessBoardHeight();
 		MainData data = new MainData(chessBoardWidth, chessBoardHeight);

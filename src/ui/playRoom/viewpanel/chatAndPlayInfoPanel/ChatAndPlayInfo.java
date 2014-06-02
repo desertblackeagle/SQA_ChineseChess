@@ -3,6 +3,7 @@ package ui.playRoom.viewpanel.chatAndPlayInfoPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import ui.ChatPanel;
+import ui.comboBox.DisplayComboBox;
 import ui.dialog.ExitDialog;
 import ui.playRoom.viewpanel.chatAndPlayInfoPanel.playInfo.PlayInfo;
 
@@ -17,7 +19,7 @@ public class ChatAndPlayInfo extends JPanel {
 	private ChatPanel chatPanel;
 	private int gap = 10;
 	private int componentWidth, componentHeight;
-	private JButton exit;
+	private JButton exit, option;
 	private PlayInfo playerAInfo, playerBInfo;
 	private JLabel forWhoToPlay;
 	private JLabel whichTeam;
@@ -44,7 +46,8 @@ public class ChatAndPlayInfo extends JPanel {
 				// TODO Auto-generated method stub
 				if (e.getActionCommand().equals("離開")) {
 					ExitDialog exitConfirm = new ExitDialog();
-//					System.exit(0);
+				} else if (e.getActionCommand().equals("設定")) {
+					new DisplayComboBox();
 				}
 			}
 		};
@@ -55,7 +58,6 @@ public class ChatAndPlayInfo extends JPanel {
 	private void initPanel() {
 		componentWidth = getWidth();
 		componentHeight = (getHeight() - 2 * gap) / 8;
-
 		playerAInfo = new PlayInfo(0, 0, getWidth(), componentHeight * 2);
 		add(playerAInfo);
 
@@ -77,15 +79,20 @@ public class ChatAndPlayInfo extends JPanel {
 	}
 
 	private void initBound() {
-		forWhoToPlay.setBounds(gap + (getWidth() - gap) / 2, gap + 2 * componentHeight, (getWidth() - gap) / 2, componentHeight);
-		whichTeam.setBounds(gap + (getWidth() - gap) / 2, gap * 2 + 3 * componentHeight, (getWidth() - gap) / 2, componentHeight);
-		exit.setBounds(gap + (getWidth() - gap) / 2, gap * 3 + 4 * componentHeight, (getWidth() - gap) / 2, componentHeight);
+		forWhoToPlay.setBounds(gap + (getWidth() - gap) / 2, gap + 2 * componentHeight, (getWidth() - gap) / 2, componentHeight - 10);
+		whichTeam.setBounds(gap + (getWidth() - gap) / 2, gap * 2 + 3 * componentHeight - 5, (getWidth() - gap) / 2, componentHeight - 10);
+		exit.setBounds(gap + (getWidth() - gap) / 2, gap * 3 + 4 * componentHeight - 15, (getWidth() - gap) / 2, componentHeight - 10);
+		option.setBounds(gap + (getWidth() - gap) / 2, gap * 4 + 5 * componentHeight - 25, (getWidth() - gap) / 2, componentHeight - 10);
 	}
 
 	private void initButton() {
 		exit = new JButton("離開");
 		exit.addActionListener(btnListener);
 		add(exit);
+
+		option = new JButton("設定");
+		option.addActionListener(btnListener);
+		add(option);
 	}
 
 	// init Component end //

@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import ui.LoseFrame;
 import ui.WinFrame;
 import ui.playRoom.PlayRoom;
+import control.ConfigGen;
 import control.TransferAbsoluteToXY;
 import data.chess.Chess;
 import data.chess.ChessXYLocOnChessBoard;
@@ -32,11 +33,15 @@ public class Connecter extends Observable implements Observer {
 	private String playerAName_C;
 	private String playerPhoto_C;
 	private PlayRoom playRoom;
+	private String serverIp = "127.0.0.1";
 
 	public Connecter(PlayRoom playRoom, ChessXYLocOnChessBoard chessXYLocOnChessBoard, String APIToken, String secreatToken, String playerAName, String playerPhoto) {
 		// TODO Auto-generated constructor stub
 		this.chessXYLocOnChessBoard = chessXYLocOnChessBoard;
 		this.playRoom = playRoom;
+
+		ConfigGen config = new ConfigGen();
+		serverIp = config.getConfig("serverIP");
 		APIToken_C = APIToken;
 		secreatToken_C = secreatToken;
 		playerAName_C = playerAName;
@@ -68,26 +73,12 @@ public class Connecter extends Observable implements Observer {
 
 	private Socket connectToLocal() {
 		try {
-			return new Socket("127.0.0.1", 56);
+			return new Socket(serverIp, 56);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("無法連線至local 改成連線至遠端");
-			return connectToRemote();
-		}
-		return null;
-	}
-
-	private Socket connectToRemote() {
-		try {
-			return new Socket("123.204.84.144", 56);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("所有Server接連線失敗");
-			JOptionPane.showMessageDialog(null, "無法連上Server", "提醒", JOptionPane.ERROR_MESSAGE);
+			System.out.println("無法連線至伺服器");
 		}
 		return null;
 	}
@@ -212,7 +203,7 @@ public class Connecter extends Observable implements Observer {
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
 			System.exit(1);
 		}

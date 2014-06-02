@@ -8,33 +8,39 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 
+import org.json.JSONObject;
+
+import control.ConfigGen;
+
 public class ParentFrame extends JFrame {
 	private int pressX, pressY;
 
 	public ParentFrame() {
 //		 TODO Auto-generated constructor stub
-//		setSize(1500, 900);
-//		setSize(1300, 900);
-		setSize(800, 600);
-//		setSize(1200, 900);
-//		setSize(1000, 600);
-//		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		ConfigGen configGen = new ConfigGen();
+		String configData = "";
+		JSONObject display = null;
+		int x, y;
+		configData = configGen.getConfig("display");
+		display = new JSONObject(configData);
+		x = display.getInt("display size x");
+		y = display.getInt("display size y");
+		assert x < 0 : "螢幕寬度小於0";
+		assert y < 0 : "螢幕高度小於0";
+		setSize(x, y);
 		setLayout(null);
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = getSize();
+		Dimension frameSize = getSize();
+		if (frameSize.height > screenSize.height)
+			frameSize.height = screenSize.height;
+		if (frameSize.width > screenSize.width)
+			frameSize.width = screenSize.width;
+		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
 
-        if (frameSize.height > screenSize.height)
-            frameSize.height = screenSize.height;
-        if (frameSize.width > screenSize.width)
-            frameSize.width = screenSize.width;
-
-        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-		
 		// 可以拖曳視窗
 		this.addMouseListener(new MouseAdapter() {
 			@Override
