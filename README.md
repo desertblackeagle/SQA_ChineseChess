@@ -1,2 +1,12 @@
 SQA_ChineseChess
 ================
+目前Center並未完成呼叫遊戲端的功能
+因此需測試需寫一Bat檔
+
+Client1的Bat內容
+
+java -jar [jar檔案位置] 32139e4848b4af382ae517b26a8f29850585e248bc074e50cbcd0e5053da8a4241c90b1b042ad9751a0ebafc6da55eb167d8 57cb051d817006c0ad6e93279d9fc4a366a58ad376ccfff8723ecfd73544d4b997d564503ac123c45c9e6db88a5fc5f4e2f4 bot1 https://sqa.swim-fish.info/media/uploaded_files/user/42340a92d683adc2ce60f399e581da8387bec57cc5bb7a6f15b2512c46284e33/2014_05_27_6b167bb0ee6f3ef0a670abf26bac0181.jpg
+
+Client2的Bat內容
+
+java -jar [jar檔案位置] 62cb1b250c6728e48adf5718abbbcd958d650d9ba9bde338527066d20f133b4d48837c72cfa641982136279050ca79fea6f4 fc9ccc5a6fbb820d142220ed0f97ffbce27e91eb4041cefeb738391bdb2d3b1f5357227f3322cb16c4dcc6dd151adac94adc bot2 https://sqa.swim-fish.info/media/noImageAvailable300.png
