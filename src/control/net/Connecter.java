@@ -1,6 +1,7 @@
 package control.net;
 
 import java.awt.HeadlessException;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
